@@ -1,0 +1,33 @@
+{
+  "name": "koco-tinymce",
+  "version": "0.1.0",
+  "homepage": "https://github.com/cbcrc/koco-tinymce",
+  "authors": [
+    "Mark Moyes <mark.moyes@cbc.ca>"
+  ],
+  "description": "Knockout Components handlers and utililities for the TinyMCE editor",
+  "main": "src/binding-handlers/simple/simple-text-editor.js",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "Koco",
+    "Knockout",
+    "TinyMCE"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "koco-dialoger": "~0.2.3",
+    "koco-image-utilities": "~0.1.1",
+    "koco-resource-utilities": "~0.1.0",
+    "koco-url-utilities": "~0.1.7",
+    "rangy": "~1.3.0"
+  }
+}

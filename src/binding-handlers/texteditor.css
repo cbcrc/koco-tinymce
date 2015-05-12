@@ -1,0 +1,198 @@
+﻿/*
+Styles généraux
+-------------------------------------------------- */
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('/v3/bower_components/fontawesome/fonts/fontawesome-webfont.eot');
+  src: url('/v3/bower_components/fontawesome/fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/v3/bower_components/fontawesome/fonts/fontawesome-webfont.woff2?v=4.3.0') format('woff'),
+    url('/v3/bower_components/fontawesome/fonts/fontawesome-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body
+{
+    font-family: Arial, Helvetica, Sans-Serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333;
+}
+a
+{
+    text-decoration: none;
+    color:  #07428A;
+}
+a:hover
+{
+    text-decoration: underline;
+    cursor: pointer;
+}
+figure {
+    display: block;
+    margin: 0 0 20px 0;
+}
+figcaption {
+    display: block;
+}
+
+figure.medianet .placeholder,
+figure.gallery .placeholder {
+    width: 300px;
+    height: 169px;
+    background: url("http://img.src.ca/16x9PlaceHolders/television/D300x169.png") no-repeat;
+
+    color: #f5f5f5;
+    text-align: center;
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 100px;
+    line-height: 169px;
+    text-decoration: inherit;
+    -webkit-font-smoothing: antialiased;
+}
+
+figure.medianet .placeholder:before,
+figure.gallery .placeholder:before {
+    text-decoration: inherit;
+    display: inline-block;
+    speak: none;
+}
+
+figure.livevideo .placeholder:before {
+    content: "\f01d";
+}
+
+figure.audio .placeholder:before {
+    content: "\f001";
+}
+
+figure.video .placeholder:before {
+    content: "\f008";
+}
+
+figure.gallery .placeholder:before {
+    content: "\f104  \f03e  \f105";
+}
+
+figure.track .placeholder:before {
+    content: "\f025";
+}
+
+figure.webradio .placeholder:before {
+    content: "\f022";
+}
+
+/*
+Espaces insécables
+-------------------------------------------------- */
+.nonbreaking {
+    width: 8px;
+    height: 1em;
+    border: 0;
+    background: #ff6a00;
+}
+.nonbreaking.hidden {
+    background: none;
+}
+.mceresizehandle {
+    display: none !important;
+}
+
+
+
+
+/*
+Paragraphes
+-------------------------------------------------- */
+p
+{
+    margin: 0 0 19px 0;
+}
+.exergue
+{
+    font-style: italic;
+    padding: 17px;
+}
+
+
+
+/*
+Encadrés
+-------------------------------------------------- */
+.framed
+{
+    border: 1px solid #474747;
+    margin: 23px 0 21px;
+    padding: 19px 20px 0 16px;
+}
+
+
+
+/*
+Listes
+-------------------------------------------------- */
+ul, ol {
+    margin: 0 0 25px 20px;
+    padding: 0;
+}
+ul li {
+    background: url(http://s.radio-canada.ca/_img/icon/bullet-tiret-list-document.gif) left 9px no-repeat;
+    padding-left: 10px;
+    list-style-type: none;
+}
+
+
+
+/*
+Citations
+-------------------------------------------------- */
+blockquote {
+    color: #868686;
+    font-size: 21px;
+    line-height: 23px;
+    margin: 29px 0;
+}
+
+blockquote p {
+    margin: 0 0 4px 0;
+}
+
+blockquote > p:before {
+    content: "« ";
+}
+blockquote > p:after {
+    content: " »";
+}
+blockquote footer .name {
+    font-size: 10px;
+    font-style: italic;
+}
+blockquote footer .name:before {
+    content: "— ";
+}
+
+/*
+NonEditable Content
+-------------------------------------------------- */
+.mceNonEditable {
+    background: #ffffcc;
+    border: 1px dashed #bbbbbb;
+    padding: 7px;
+    width: auto;
+}
+
+.mceEditable {
+    background: white;
+}
+
+#mce_noneditablecaret {border: 0 !important}
+
+
+/*
+Fake spans
+-------------------------------------------------- */
+div.fakespan {
+    display: inline;
+}

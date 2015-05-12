@@ -1,0 +1,95 @@
+/* Bootstrap-style popup*/
+
+/* Reset */
+.bootstrap a, .bootstrap span {
+    width:auto;
+    height:auto;
+    overflow:hidden;
+    display: block;
+}
+
+/* General */
+.bootstrap {  
+    position: fixed;
+    height: auto !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 560px !important;
+    margin: -250px 0 0 -280px !important;
+    overflow: auto;
+    background-color: #ffffff;
+    padding-top: 50px;
+    border: 1px solid #999;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    *border: 1px solid #999;
+    -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+            border-radius: 6px;
+    -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+        -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    -webkit-background-clip: padding-box;
+        -moz-background-clip: padding-box;
+            background-clip: padding-box;
+
+}
+
+@media (max-width: 767px) {
+  .bootstrap {
+    position: fixed;
+    top: 80px !important;
+    right: 20px !important;
+    left: 20px !important;
+    width: auto !important;
+    margin: 0 !important;
+  }
+}
+
+.mceEventBlocker, .bootstrap_modalBlocker {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: #000000;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+
+
+/* Top */
+
+.bootstrap .mceTop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 9px 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.bootstrap .mceClose {
+    position: absolute;
+    top: 17px;
+    right: 15px;
+    width: 14px;
+    height: 14px;
+    background-image: url("/v2/content/images/glyphicons-halflings.png");
+    background-position: -312px 0;
+    background-repeat: no-repeat;
+}
+
+.bootstrap .mceTop span {
+    margin: 0;
+    line-height: 30px;
+    font-weight: bold;
+}
+
+.bootstrap .mceBottom span {
+    display: none;
+}
+
+.bootstrap .mceMiddle iframe {
+    width: 100% !important;
+}
