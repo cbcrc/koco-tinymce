@@ -12,6 +12,7 @@ define([
 
         var defaultSettings = {
             enabledButtons: 'bold,italic,nonbreaking',
+            language: 'fr'
         };
 
         ko.bindingHandlers.singleLineTextEditor = {
@@ -28,7 +29,7 @@ define([
                 }
 
                 var settings = $.extend({}, defaultSettings, allBindingsAccessor().singleLineTextEditorSettings);
-
+                
                 var tinyMceConfig = {
                     mode: 'exact',
                     elements: tinymceid,
@@ -37,7 +38,7 @@ define([
                     popup_css: urls.url('bower_components/bootstrap/dist/css/bootstrap.min.css'),
                     popup_css_add: urls.url('bower_components/koco-tinymce/src/binding-handlers/bootstrap-tinyMCE.dialog.min.css'),
                     theme: 'advanced',
-                    language: 'fr',
+                    language: settings.language, 
                     width: 'auto',
                     height: '30px',
                     plugins: 'advvisualchars,advnonbreaking,paste,advcode',
@@ -50,7 +51,7 @@ define([
                     forced_root_block: '',
                     handle_event_callback: tinyMceBlockEnterKey,
                     setup: tinyMceSetup,
-                    paste_preprocess: tinyMcePastePreprocess
+                    paste_preprocess: tinyMcePastePreprocess,
                 };
 
                 ko.applyBindingsToNode(element, {

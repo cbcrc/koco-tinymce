@@ -1,12 +1,12 @@
 {
   "name": "koco-tinymce",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/cbcrc/koco-tinymce",
   "authors": [
     "Mark Moyes <mark.moyes@cbc.ca>"
   ],
   "description": "Knockout Components handlers and utililities for the TinyMCE editor",
-  "main": "src/binding-handlers/simple/simple-text-editor.js",
+  "main": "",
   "moduleType": [
     "amd"
   ],
