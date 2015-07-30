@@ -19,17 +19,14 @@ define([
                     canEditHtml = allBindingsAccessor().canEditHtml;
 
                 var tinyMceConfig = {
-                    //script_url: '/Scripts/tinymce/tiny_mce_gzip.ashx',/*'/Content/tinymce-single.css',*/
                     mode: 'exact',
                     elements: tinymceid,
-                    //mode:'none',
                     theme: 'advanced',
                     dialog_type: 'modal',
                     language: 'fr',
                     width: '100%',
                     height: '200px',
                     custom_shortcuts: true,
-
                     plugins: 'pagebreak,style,layer,table,iespell,inlinepopups,insertdatetime,preview,searchreplace,print,paste,directionality,fullscreen,framed,advcode,' +
                         'noneditable,sortablevisualblocks,advvisualchars,advnonbreaking,xhtmlxtras,template,quote,buttonToggler,figureSelector,br,linkCustom',
 
@@ -52,6 +49,7 @@ define([
 
                     schema: 'html5',
                     end_container_on_empty_block: true,
+
                     style_formats: [{
                         title: 'Exergue',
                         block: 'p',
@@ -71,7 +69,6 @@ define([
                         block: 'h4'
                     }],
 
-                    // Theme options
                     theme_advanced_buttons1: 'bold,italic,|,linkCustom,unlink,|,br,nonbreaking' + (canEditHtml ? ',code' : ''),
                     theme_advanced_buttons2: '',
                     theme_advanced_blockformats: 'p,h2,h3,h4',
@@ -81,16 +78,22 @@ define([
                     theme_advanced_resize_horizontal: false,
                     theme_advanced_resizing_use_cookie: false,
 
-                    content_css: urls.url('components/tinymce/binding-handlers/texteditor.min.css'),
-                    popup_css: urls.url('bower_components/bootstrap/dist/css/bootstrap.min.css'),
-                    popup_css_add: urls.url('components/tinymce/binding-handlers/bootstrap-tinyMCE.dialog.min.css'),
+                    content_css_url: 'bower_components/koco-tinymce/src/binding-handlers/texteditor.min.css',
+                    popup_css_url: 'bower_components/bootstrap/dist/css/bootstrap.min.css',
+                    popup_css_add_url: 'bower_components/koco-tinymce/src/binding-handlers/bootstrap-tinyMCE.dialog.min.css',
+
                     inlinepopups_skin: 'bootstrap',
                     buttonTogglerConfig: buttonTogglerConfig,
                     handle_event_callback: tinymceEvents.handleNonEditableExitKeys,
-                    setup: tinyMceSetup /*tinyMceSetup*/,
+                    setup: tinyMceSetup,
                     paste_preprocess: tinymceEvents.pastePreprocess
-                };
+                }
 
+                $.extend(tinyMceConfig, allBindingsAccessor().editorOptions);
+
+                tinyMceConfig.content_css = urls.url(tinyMceConfig.content_css_url);
+                tinyMceConfig.popup_css = urls.url(tinyMceConfig.popup_css_url);
+                tinyMceConfig.popup_css_add = urls.url(tinyMceConfig.popup_css_add_url);
 
                 ko.applyBindingsToNode(element, {
                     value: valueObservable
