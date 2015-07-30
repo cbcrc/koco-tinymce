@@ -11,7 +11,7 @@ define([
         var editorId = 0;
 
         ko.bindingHandlers.simpleTextEditor = {
-            init: function(element, valueAccessor /*, allBindingsAccessor, viewModel, context*/) {
+            init: function(element, valueAccessor, allBindingsAccessor /*, viewModel, context*/) {
                 var $textArea = $(element),
                     $buffer = $('<div>'),
                     valueObservable = valueAccessor(),
