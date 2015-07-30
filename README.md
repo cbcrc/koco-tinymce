@@ -11,7 +11,7 @@ Because TinyMCE attempts to load its own plugins and styles once it's initialize
 
 ```javascript
     window.tinyMCEPreInit = {
-    	suffix: '',
+    	suffix: '_src',
         base : '/[your app directory]/bower_components/koco-tinymce/non_bower_components/tinymce'
     };
 ```
@@ -37,6 +37,40 @@ You will also need to tell the optimizer to include any dynamically loaded files
 	];
 ```
 
+Finally, make sure you load and init the custom plugins.
+
+```
+define([
+        'bower_components/koco-tinymce/src/plugins/images-mce',
+        'bower_components/koco-tinymce/src/plugins/link-mce',
+        'bower_components/koco-tinymce/src/plugins/photo-album-mce',
+        'bower_components/koco-tinymce/src/plugins/external-multimedia-content-mce',
+        'bower_components/koco-tinymce/src/plugins/html-snippet-mce',
+        'bower_components/koco-tinymce/src/plugins/shortcuts-mce',
+        'bower_components/koco-tinymce/src/plugins/mce-button-toggler'
+    ],
+    function(
+            images,
+            link,
+            photoAlbum,
+            externalMultimediaContent,
+            htmlSnippet,
+            shortcuts,
+            buttonToggler
+        ) {
+            'use strict';
+
+            images.init();
+            link.init();
+            photoAlbum.init();
+            externalMultimediaContent.init();
+            htmlSnippet.init();
+            shortcuts.init();
+            buttonToggler.init();
+
+        return;
+    });
+```
 ##Usage
 
 To come
