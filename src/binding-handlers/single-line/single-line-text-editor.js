@@ -62,9 +62,11 @@ define([
 
                 $textArea.addClass('mce-single');
 
-                //setTimeout(function () {
-                tinyMCE.init(tinyMceConfig);
-                //}, 100);
+                // yucky, but something in tinyMCE's init timing seems to fail sometimes
+                // without this
+                setTimeout(function () {
+                    tinyMCE.init(tinyMceConfig);
+                }, 100);
 
                 //var interval = setInterval(function () {
                 //    if (!tinymceUtilities.isLoading) {

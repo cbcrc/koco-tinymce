@@ -101,8 +101,11 @@ define([
 
                 $textArea.attr('id', tinymceid);
 
-                tinyMCE.init(tinyMceConfig);
-
+                // yucky, but something in tinyMCE's init timing seems to fail sometimes
+                // without this
+                setTimeout(function () {
+                    tinyMCE.init(tinyMceConfig);
+                }, 100);
 
                 ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
                     var editor = tinyMCE.get(element.id);
