@@ -169,6 +169,8 @@ define([
                 contentItemSummary = null,
                 result = $.extend({}, ed.settings.medianetDialogSettings);
 
+            result.imagesDialogSettings = ed.settings.imagesDialogSettings;
+
             if (isResourceSelected) {
                 contentItemSummary = {
                     legacy: {},

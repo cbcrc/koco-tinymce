@@ -19,7 +19,7 @@ define([
         var editorId = 0;
 
         ko.bindingHandlers.fullblownTextEditor = {
-            init: function(element, valueAccessor, allBindingsAccessor, viewModel, context) {
+            init: function(element, valueAccessor, allBindingsAccessor/*, viewModel, context*/) {
                 var $textArea = $(element),
                     $buffer = $('<div>'),
                     valueObservable = valueAccessor(),
@@ -30,10 +30,9 @@ define([
                     }, allBindings.medianetDialogSettings || {}),
                     imagesDialogSettings = $.extend({
                         contentTypeIds: [20]
-                    }, allBindings.medianetDialogSettings || {}),
+                    }, allBindings.imagesDialogSettings || allBindings.medianetDialogSettings || {}),
                     canEditHtml = allBindingsAccessor().canEditHtml;
 
-                //#region Config
 
                 var pluginsToLoad = [   'pagebreak',
                                         'style',
@@ -87,7 +86,7 @@ define([
                         'data-code-emission|data-android-url|data-blackberry-url|data-ios-url|data-image|data-zap|data-embed|' +
                         'data-une|data-cond|data-gui|data-duration|data-id|data-p|data-m|data-g|data-version|data-display|data-mce-contenteditable],' +
                         '-footer,-figure,-figcaption,-span,-fakespan,-small,-p,div,script[async|charset|src|type],noscript,' +
-                        'iframe[*],embed[*]',
+                        'iframe[*],embed[*],img[data-nonbreaking|class|src|alt]',
 
                     valid_children: '+object[embed],+figcaption[span],+small[span]',
 
@@ -148,33 +147,19 @@ define([
                     imagesDialogSettings: imagesDialogSettings
                 };
 
-                //#endregion
-
                 ko.applyBindingsToNode(element, {
                     value: valueObservable
                 });
 
                 $textArea.attr('id', tinymceid);
 
-                tinyMCE.init(tinyMceConfig);
-
-                //var interval = setInterval(function () {
-                //    if (!tinymceUtilities.isLoading) {
-                //        clearInterval(interval);
-                //        tinymceUtilities.isLoading = true;
-                //        tinyMCE.settings = tinyMceConfig;
-                //        setTimeout(function () {
-                //            tinyMCE.execCommand('mceAddControl', true, tinymceid);
-                //        }, 1000);
-                //        //tinyMCE.init(tinyMceConfig);
-                //    }
-                //}, 1000);
+                setTimeout(function () {
+                    tinyMCE.init(tinyMceConfig);
+                }, 0);
 
                 ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
                     tinyMCE.execCommand('mceRemoveControl', false, element.id);
                 });
-
-                //#region Utilities
 
                 function tinyMceSetup(editor) {
                     //editor.onKeyUp.add(contentChanged);
@@ -204,13 +189,10 @@ define([
                 function contentChanged(editor) {
                     var rawMarkup = tinymceUtilities.cleanTinyMceMarkup(editor.getContent(), $buffer);
 
-                    if (rawMarkup != valueObservable()) {
-                        //$textArea.text(rawMarkup);
+                    if (rawMarkup !== valueObservable()) {
                         valueObservable(rawMarkup);
                     }
                 }
-
-                //#endregion
             }
         };
 
@@ -220,7 +202,7 @@ define([
             });
             var cleanedUpRawContent = tinymceUtilities.toTinyMceMarkup(currentRawContent, editor);
 
-            if (currentRawContent != cleanedUpRawContent) {
+            if (currentRawContent !== cleanedUpRawContent) {
                 editor.setContent(cleanedUpRawContent, {
                     format: 'raw'
                 });

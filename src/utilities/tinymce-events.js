@@ -32,7 +32,7 @@ define(['jquery', 'url-utilities', 'tinymce', 'rangy'],
             } else {
                 o.content = o.content
                     //.replace(/&#160;/g, '&nbsp;')
-                    .replace(/&nbsp;/gi, '<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="nonbreaking' +
+                    .replace(/&nbsp;/gi, '<img data-nonbreaking src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="nonbreaking' +
                         ((!pl.editor.plugins.advvisualchars || !pl.editor.plugins.advvisualchars.state) ? ' hidden' : '') +
                         '"/>');
             }
@@ -145,7 +145,7 @@ define(['jquery', 'url-utilities', 'tinymce', 'rangy'],
             }
         }
 
-        function nodeChanged(editorId, node, undoIndex, undoLevels, visualAid, anySelection) {
+        function nodeChanged(editorId/*, node, undoIndex, undoLevels, visualAid, anySelection*/) {
             //Récupérer le contenu du iframe
             var $contents = $('#' + editorId + '_ifr').contents();
 
@@ -166,7 +166,7 @@ define(['jquery', 'url-utilities', 'tinymce', 'rangy'],
             return false; // Pass to next handler in chain
         }
 
-        function openMediaEditor(ed, evt) {
+        function openMediaEditor(ed/*, evt*/) {
             //Double-clic sur un média ouvre la fenêtre d'édition associée.
             var selectedNode = ed.selection.getNode();
 

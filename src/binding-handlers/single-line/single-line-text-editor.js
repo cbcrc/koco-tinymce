@@ -16,7 +16,7 @@ define([
         };
 
         ko.bindingHandlers.singleLineTextEditor = {
-            init: function(element, valueAccessor, allBindingsAccessor, viewModel, context) {
+            init: function(element, valueAccessor, allBindingsAccessor/*, viewModel, context*/) {
 
                 var $textArea = $(element),
                     $buffer = $('<div>'),
@@ -51,7 +51,7 @@ define([
                     forced_root_block: '',
                     handle_event_callback: tinyMceBlockEnterKey,
                     setup: tinyMceSetup,
-                    paste_preprocess: tinyMcePastePreprocess,
+                    paste_preprocess: tinyMcePastePreprocess
                 };
 
                 ko.applyBindingsToNode(element, {
@@ -66,27 +66,11 @@ define([
                 // without this
                 setTimeout(function () {
                     tinyMCE.init(tinyMceConfig);
-                }, 100);
-
-                //var interval = setInterval(function () {
-                //    if (!tinymceUtilities.isLoading) {
-                //        clearInterval(interval);
-                //        tinymceUtilities.isLoading = true;
-                //        tinyMCE.settings = tinyMceConfig;
-                //        setTimeout(function() {
-                //            tinyMCE.execCommand('mceAddControl', true, tinymceid);
-                //        }, 1000);
-                //        //tinyMCE.init(tinyMceConfig);
-                //    }
-                //}, 1000);
-
-
+                }, 0);
 
                 ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
                     tinyMCE.execCommand('mceRemoveControl', false, element.id);
                 });
-
-                //#region Utilities
 
                 function tinyMceSetup(editor) {
                     editor.onKeyUp.add(contentChanged);
@@ -96,19 +80,9 @@ define([
 
                 function tinyMceInit(editor) {
                     valueObservable.tinymce = editor;
-
                     $textArea.siblings('span.mceEditor').addClass('scoop-editor-single');
                     updateContent(editor);
-
-                    //Pour supporter le cas ou la valeur est updatée par autre chose que l'éditeur
-                    //valueObservable.subscribe(function () {
-                    //    tinymceUtilities.updateContent(getValueFromObservable(valueObservable, editor), editor, $buffer);
-                    //});
-
                     tinymceUtilities.isLoading = false;
-
-                    //TODO: Loader
-                    //$('#tinymce-loading').hide();
                 }
 
                 function contentChanged(editor) {
@@ -119,8 +93,6 @@ define([
                         valueObservable(rawMarkup);
                     }
                 }
-
-                //#endregion
             }
         };
 
@@ -130,7 +102,7 @@ define([
             });
             var cleanedUpRawContent = tinymceUtilities.toTinyMceMarkup(currentRawContent, editor);
 
-            if (currentRawContent != cleanedUpRawContent) {
+            if (currentRawContent !== cleanedUpRawContent) {
                 editor.setContent(cleanedUpRawContent, {
                     format: 'raw'
                 });
@@ -142,13 +114,13 @@ define([
         }
 
         function getTinyMceValidElementsFromButtons(buttons) {
-            return $.map(buttons.split(','), function(button) {
+            return buttons.split(',').map(function(button) {
                 if (button === 'bold') {
-                    return '-strong';
+                    return '-strong/b';
                 } else if (button === 'italic') {
-                    return '-em';
+                    return '-em/i';
                 } else if (button === 'nonbreaking') {
-                    return '-img[src|alt|class]';
+                    return 'img[!data-nonbreaking|src|alt|class]';
                 }
                 return '';
             }).join(',');

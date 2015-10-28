@@ -1,6 +1,8 @@
 // Copyright (c) CBC/Radio-Canada. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+@mce-resize-image-path: "/images/resize.png";
+
 /*TODO: utiliser variables de bootstrap*/
 span.mceEditor.defaultSkin {
     table.mceLayout tr.mceLast td {
@@ -15,7 +17,7 @@ span.mceEditor.defaultSkin {
     .mceStatusbar a.mceResize {
         display: inline-block;
         cursor: s-resize;
-        background: url(/v3/images/resize.png) no-repeat 0 0;
+        background: url('@mce-resize-image-path') no-repeat 0 0;
         width: 28px;
         height: 13px;
         float: none;

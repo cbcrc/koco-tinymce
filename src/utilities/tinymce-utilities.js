@@ -1,6 +1,3 @@
-// Copyright (c) CBC/Radio-Canada. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
-
 define(['jquery', 'url-utilities', 'tinymce'],
     function($, urls, tinyMCE) {
         'use strict';
@@ -25,32 +22,102 @@ define(['jquery', 'url-utilities', 'tinymce'],
                 return '';
             }
 
-            $buffer.html(tinyMceMarkup).find('img.nonbreaking').replaceWith('&nbsp;');
+            $buffer.html(tinyMceMarkup);
+            removeAllClassesRelatedToNonEditablePlugin($buffer);
+            replaceQuotes($buffer);
+            replaceFakeSpans($buffer);
+            replaceNonBreakingSpaces($buffer);
+
+            return normalizeQuotesWithNonBreakingSpaces($buffer.html());
+        };
+
+        function removeAllClassesRelatedToNonEditablePlugin($buffer) {
+            $buffer.find('.mceNonEditable').removeClass('mceNonEditable');
+            $buffer.find('.mceEditable').removeClass('mceEditable');
+        }
+
+        function replaceQuotes($buffer) {
+            $buffer.find('blockquote')
+                .each(function() {
+                    var blockquote = $(this);
+                    var quote = blockquote.find('> p');
+                    if (!quote.length) {
+                        blockquote.prepend('<p></p>');
+                    } else if (quote.first().html() === 'n/a') {
+                        quote.first().html('');
+                    }
+                });
+
+            $buffer.find('blockquote > footer > p:first-child')
+                .each(function() {
+                    replaceTag(this, '<span>');
+                });
+        }
+
+        function replaceFakeSpans($buffer) {
+            $buffer.find('.fakespan')
+                .removeClass('fakespan')
+                .each(function() {
+                    replaceTag(this, '<span>');
+                });
+        }
+
+        function replaceNonBreakingSpaces($buffer) {
+            $buffer.find('.nonbreaking').replaceWith('&nbsp;');
+        }
+
+        function normalizeQuotesWithNonBreakingSpaces(html) {
+            return html
+                .replace(/(«|&laquo;)(\s|&nbsp;)*/g, '&laquo;&nbsp;')
+                .replace(/(\s|&nbsp;)*(»|&raquo;)/g, '&nbsp;&raquo;');
+        }
+
+        TinymceUtilities.prototype.toTinyMceMarkup = function(rawMarkup, editor) {
+            var $buffer = $('<div>');
+            var markup = rawMarkup.replace(/&nbsp;/gi, '<img data-nonbreaking src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="nonbreaking' +
+                ((!editor.plugins.advvisualchars || !editor.plugins.advvisualchars.state) ? ' hidden' : '') + '"/>');
+
+            $buffer.html(markup);
+            $buffer.find('figure, blockquote')
+                .addClass('mceNonEditable');
+            $buffer.find('blockquote > p')
+                .addClass('mceEditable')
+                .each(allowEditingEmptyQuote);
+            $buffer.find('blockquote > footer > span')
+                .addClass('mceEditable')
+                .each(function() {
+                    //les span empêchent le plugin tinyMce/noneditable de fonctionner correctement
+                    replaceTag(this, '<p>');
+                });
+
+            $buffer.find('figcaption span')
+                .addClass('fakespan')
+                .each(function() {
+                    replaceTag(this, '<div>');
+                });
 
             return $buffer.html();
         };
 
-        TinymceUtilities.prototype.toTinyMceMarkup = function(rawMarkup, editor) {
-            var tinyMceMarkup = rawMarkup;
+        function allowEditingEmptyQuote() {
+            if (!this.innerHTML || this.innerHTML.match(/$\s*^/m)) {
+                this.innerHTML = 'n/a';
+            }
+        }
 
-            //tinyMceMarkup = tinyMceMarkup.replace(/\r/g, '\n');
-            //tinyMceMarkup = tinyMceMarkup.replace(/\r\n/g, '\n');
-            //tinyMceMarkup = tinyMceMarkup.replace(/(\t|\n)/g, ' ');
-            //tinyMceMarkup = tinyMceMarkup.replace(/<\/p>/gi, ' ');
-            //tinyMceMarkup = tinyMceMarkup.replace(/<b(\s+[^>]*)?>/gi, '<strong>');
-            //tinyMceMarkup = tinyMceMarkup.replace(/<\/b>/gi, '</strong>');
-            //tinyMceMarkup = tinyMceMarkup.replace(/<i(\s+[^>]*)?>/gi, '<em>');
-            //tinyMceMarkup = tinyMceMarkup.replace(/<\/i>/gi, '</em>');
-            //tinyMceMarkup = tinyMceMarkup.replace(/&#160;/g, "&nbsp;");
-            tinyMceMarkup = tinyMceMarkup.replace(/&nbsp;/gi, '<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="nonbreaking' +
-                ((!editor.plugins.advvisualchars || !editor.plugins.advvisualchars.state) ? ' hidden' : '') + '"/>');
+        function replaceTag(currentElem, newTagObj) {
+            var $currentElem = $(currentElem);
+            var $newTag = $(newTagObj).clone();
+            var newTag = $newTag[0];
 
-            //if (tinyMceMarkup === "&nbsp;") { //bugfix IE10
-            //    tinyMceMarkup = '';
-            //}
+            newTag.className = currentElem.className;
+            $.each($currentElem.prop('attributes'), function() {
+                $newTag.attr(this.name, this.value);
+            });
 
-            return tinyMceMarkup;
-        };
+            $currentElem.wrapAll($newTag);
+            $currentElem.contents().unwrap();
+        }
 
         TinymceUtilities.prototype.isInternetExplorer = function() {
             return tinyMCE.isIE;

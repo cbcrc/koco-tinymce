@@ -39,6 +39,9 @@ Espaces insécables
 .nonbreaking.hidden {
     background: none;
 }
+img.nonbreaking[data-mce-selected] {
+  outline: none;
+}
 .mceresizehandle {
     display: none !important;
 }

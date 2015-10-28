@@ -12,7 +12,7 @@ Because TinyMCE attempts to load its own plugins and styles once it's initialize
 ```javascript
     window.tinyMCEPreInit = {
     	suffix: '_src',
-        base : '/[your app directory]/bower_components/koco-tinymce/non_bower_components/tinymce'
+        base : '[path to tinymce src file]'
     };
 ```
 You'll probably want to copy that file out of the `src/bower_components/koco-tinymce/src` directory and put it somewhere where it won't get overwritten next time you do a `bower update`. Then in your `require.config` file:
@@ -32,7 +32,7 @@ You will also need to tell the optimizer to include any dynamically loaded files
 	global.folders = [
 	    './src/web.config',
 	    ...
-	    './src/bower_components/koco-tinymce/non_bower_components/tinymce/**/**/**/**/*',
+	    '[path to tinymce folder]/**/**/**/**/*',
 	    './src/bower_components/koco-tinymce/src/**/**/*.css'
 	];
 ```

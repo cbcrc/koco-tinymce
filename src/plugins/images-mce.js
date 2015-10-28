@@ -31,6 +31,7 @@ define([
                 .attr('itemtype', 'http://schema.org/ImageObject')
                 .attr('itemid', dialogResult.concreteImage.mediaLink.href) //On pourrait aussi mettre le normalizedname ?
                 .attr('data-align', dialogResult.align)
+                .attr('data-link', dialogResult.link)
                 .addClass('associatedMedia')
                 .addClass('image')
                 .addClass('mceNonEditable')
@@ -82,7 +83,9 @@ define([
         function fromMarkupToDialogInput(ed) {
             var node = ed.selection.getNode();
             var $figure = $(node).closest('figure.image');
-            var result = {};
+            var result = {
+                settings: ed.settings.imagesDialogSettings
+            };
 
             if ($figure.length > 0) {
                 result.concreteImageUrl = $figure.find('img').length > 0 ? $($figure.find('img')[0]).attr('src') : '';
@@ -91,6 +94,7 @@ define([
                 result.pressAgency = $figure.find('.copyrightHolder').length > 0 ? $figure.find('.copyrightHolder').children('div.fakespan').html() : '';
                 result.imageCredits = $figure.find('.creator').length > 0 ? $figure.find('.creator').children('div.fakespan').html() : '';
                 result.align = $figure.data('align');
+                result.link = $figure.data('link');
             }
 
             return result;

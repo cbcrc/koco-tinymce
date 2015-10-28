@@ -87,7 +87,7 @@ define([
                     handle_event_callback: tinymceEvents.handleNonEditableExitKeys,
                     setup: tinyMceSetup,
                     paste_preprocess: tinymceEvents.pastePreprocess
-                }
+                };
 
                 $.extend(tinyMceConfig, allBindingsAccessor().editorOptions);
 
@@ -152,7 +152,7 @@ define([
                 function contentChanged(editor) {
                     var rawMarkup = tinymceUtilities.cleanTinyMceMarkup(editor.getContent(), $buffer);
 
-                    if (rawMarkup != valueObservable()) {
+                    if (rawMarkup !== valueObservable()) {
                         $textArea.text(rawMarkup);
                         valueObservable(rawMarkup);
                     }
@@ -166,7 +166,7 @@ define([
             });
             var cleanedUpRawContent = tinymceUtilities.toTinyMceMarkup(currentRawContent, editor);
 
-            if (currentRawContent != cleanedUpRawContent) {
+            if (currentRawContent !== cleanedUpRawContent) {
                 editor.setContent(cleanedUpRawContent, {
                     format: 'raw'
                 });

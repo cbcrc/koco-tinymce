@@ -15,14 +15,14 @@ define(['./mce-plugin-factory', '../dialog-result-handler', 'dialoger'],
             return puglinFactory.createMcePlugin(pluginConfig, mceCommand);
 
             function mceCommand(ed) {
-                var modalResultHandler = new DialogResultHandler(ed).getOnResultHandler_toBeInvokeBeforeShowingModal();
+                var dialogResultHandler = new DialogResultHandler(ed);
 
                 dialoger.show(pluginConfig.dialog, pluginConfig.fromMarkupToDialogInput(ed)).then(function(dialogResult) {
-                        if (dialogResult) {
-                            var markup = pluginConfig.fromDialogResultToMarkup(dialogResult);
-                            modalResultHandler(markup);
-                        }
-                    });
+                    if (dialogResult) {
+                        var markup = pluginConfig.fromDialogResultToMarkup(dialogResult);
+                        dialogResultHandler.replaceElement(markup);
+                    }
+                });
             }
         }
     });

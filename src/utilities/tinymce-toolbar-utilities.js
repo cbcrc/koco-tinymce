@@ -10,9 +10,6 @@ define(['jquery', 'router', 'dialoger', 'tinymce'],
                 var $window = $(window);
                 var $container = $textArea.parent();
                 var $tinymceEndMarker = getNextElement($container);
-                //var $tinymceEndMarker = $('<div/>');
-                //$tinymceEndMarker.hide();
-                //$container.append($tinymceEndMarker);
 
                 var $tinyMceBody = $container.find('#' + $textArea[0].id + '_tbl'),
                     $tinyMceToolbarBody = $container.find('#' + $textArea[0].id + '_external'),
@@ -75,8 +72,6 @@ define(['jquery', 'router', 'dialoger', 'tinymce'],
                         return $.waypoints('viewportHeight') - $(this).outerHeight();
                     }
                 });
-
-                //#region helpers
 
                 function isScrolledIntoView($elem, completelyVisible) {
                     var docViewTop = $window.scrollTop();
@@ -151,11 +146,6 @@ define(['jquery', 'router', 'dialoger', 'tinymce'],
 
                 function isActiveView($element) {
                     return $element.is(':visible');
-                    // var $parentView = $element.closest('div[data-active-view]');
-
-                    // //todo: check if any children has div[data-active-view] === true (then the $parentView is not active!)
-                    // return $parentView.is(':visible') && !dialoger.isOpening() &&
-                    //     !router.isNavigating() && $parentView.attr('data-active-view') === 'true';
                 }
 
                 function getBottomOffset(withPx) {
@@ -184,11 +174,7 @@ define(['jquery', 'router', 'dialoger', 'tinymce'],
 
                     return docViewTop + getTopOffset() < elemTop;
                 }
-
-
-                //#endregion
             }
-
         };
 
         function getNextElement($element) {
