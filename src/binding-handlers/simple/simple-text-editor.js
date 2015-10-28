@@ -78,9 +78,9 @@ define([
                     theme_advanced_resize_horizontal: false,
                     theme_advanced_resizing_use_cookie: false,
 
-                    content_css_url: 'bower_components/koco-tinymce/src/binding-handlers/texteditor.min.css',
-                    popup_css_url: 'bower_components/bootstrap/dist/css/bootstrap.min.css',
-                    popup_css_add_url: 'bower_components/koco-tinymce/src/binding-handlers/bootstrap-tinyMCE.dialog.min.css',
+                    content_css_url: urls.url('bower_components/koco-tinymce/src/binding-handlers/texteditor.min.css'),
+                    popup_css_url: urls.url('bower_components/bootstrap/dist/css/bootstrap.min.css'),
+                    popup_css_add_url: urls.url('bower_components/koco-tinymce/src/binding-handlers/bootstrap-tinyMCE.dialog.min.css'),
 
                     inlinepopups_skin: 'bootstrap',
                     buttonTogglerConfig: buttonTogglerConfig,
