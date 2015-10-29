@@ -78,9 +78,6 @@ define([
                     theme_advanced_resize_horizontal: false,
                     theme_advanced_resizing_use_cookie: false,
 
-                    content_css_url: urls.url('bower_components/koco-tinymce/src/binding-handlers/texteditor.min.css'),
-                    popup_css_url: urls.url('bower_components/bootstrap/dist/css/bootstrap.min.css'),
-                    popup_css_add_url: urls.url('bower_components/koco-tinymce/src/binding-handlers/bootstrap-tinyMCE.dialog.min.css'),
 
                     inlinepopups_skin: 'bootstrap',
                     buttonTogglerConfig: buttonTogglerConfig,
@@ -105,40 +102,24 @@ define([
                 // without this
                 setTimeout(function () {
                     tinyMCE.init(tinyMceConfig);
-                }, 100);
+                }, 0);
 
                 ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
                     var editor = tinyMCE.get(element.id);
 
                     tinyMCE.execCommand('mceFocus', false, element.id);
                     tinyMCE.execCommand('mceRemoveControl', true, element.id);
-
-                    // editor.onKeyUp.remove(contentChanged);
-                    // editor.onChange.remove(contentChanged);
-                    // editor.onInit.remove(tinyMceInit);
-
                     editor.remove();
-
                     $buffer.remove();
-
                     tinyMceConfig = null;
-
-                    // window.tinymce = null;
-                    // delete window.tinymce;
-
-                    // window.tinyMCE = null;
-                    // delete window.tinyMCE;
-                    //tinyMCE.execCommand('mceRemoveControl', false, element.id);
                 });
 
                 //TODO (important): Le fait d'utiliser l'extension setup de tinymce cause un memory leak...
                 function tinyMceSetup( editor) {
-                    //var editor = arguments[0];
-                    // var editor = tinyMCE.get(tinymceid);
+
                      editor.onKeyUp.add(contentChanged);
                      editor.onChange.add(contentChanged);
                     editor.onInit.add(tinyMceInit);
-                    //editor.onDblClick.add(tinymceEvents.openMediaEditor);
                 }
 
                 function tinyMceInit(editor) {

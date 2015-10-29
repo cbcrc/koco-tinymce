@@ -29,17 +29,16 @@ define([
                 }
 
                 var settings = $.extend({}, defaultSettings, allBindingsAccessor().singleLineTextEditorSettings);
-                
+
                 var tinyMceConfig = {
                     mode: 'exact',
                     elements: tinymceid,
-                    //mode:'none',
                     content_css: urls.url('bower_components/koco-tinymce/src/binding-handlers/single-line/single-line-text-editor.min.css'),
                     popup_css: urls.url('bower_components/bootstrap/dist/css/bootstrap.min.css'),
                     popup_css_add: urls.url('bower_components/koco-tinymce/src/binding-handlers/bootstrap-tinyMCE.dialog.min.css'),
                     theme: 'advanced',
-                    language: settings.language, 
-                    width: 'auto',
+                    language: settings.language,
+                    width: '100%',
                     height: '30px',
                     plugins: 'advvisualchars,advnonbreaking,paste,advcode',
                     theme_advanced_buttons1: settings.enabledButtons,

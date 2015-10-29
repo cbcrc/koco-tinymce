@@ -69,10 +69,8 @@ define([
                                     ];
 
                 var tinyMceConfig = {
-                    //script_url: '/Scripts/tinymce/tiny_mce_gzip.ashx',/*'/Content/tinymce-single.css',*/
                     mode: 'exact',
                     elements: tinymceid,
-                    //mode:'none',
                     theme: 'advanced',
                     dialog_type: 'modal',
                     language: 'fr',
@@ -133,9 +131,9 @@ define([
                     theme_advanced_resizing_use_cookie: false,
 
 
-                    content_css_url: urls.url('bower_components/koco-tinymce/src/binding-handlers/texteditor.min.css'),
-                    popup_css_url: urls.url('bower_components/bootstrap/dist/css/bootstrap.min.css'),
-                    popup_css_add_url: urls.url('bower_components/koco-tinymce/src/binding-handlers/bootstrap-tinyMCE.dialog.min.css'),
+                    content_css: urls.url('bower_components/koco-tinymce/src/binding-handlers/texteditor.min.css'),
+                    popup_css: urls.url('bower_components/bootstrap/dist/css/bootstrap.min.css'),
+                    popup_css_add: urls.url('bower_components/koco-tinymce/src/binding-handlers/bootstrap-tinyMCE.dialog.min.css'),
                     inlinepopups_skin: 'bootstrap',
 
 
@@ -163,7 +161,6 @@ define([
                 });
 
                 function tinyMceSetup(editor) {
-                    //editor.onKeyUp.add(contentChanged);
                     editor.onChange.add(contentChanged);
                     editor.onInit.add(tinyMceInit);
                     editor.onDblClick.add(tinymceEvents.openMediaEditor);
@@ -171,20 +168,9 @@ define([
 
                 function tinyMceInit(editor) {
                     valueObservable.tinymce = editor;
-
                     updateContent(editor);
-
-                    //Pour supporter le cas ou la valeur est updatée par autre chose que l'éditeur
-                    //TODO
-                    //valueObservable.subscribe(function () {
-                    //    updateContent(editor);
-                    //});
-
                     toolbarUtilities.init(editor, $textArea);
-
                     tinymceUtilities.isLoading = false;
-                    //TODO: Loader
-                    //$('#tinymce-loading').hide();
                 }
 
                 function contentChanged(editor) {
