@@ -25,10 +25,8 @@ define([
 
             self.$textArea.attr('id', self.tinymceid);
 
-            var tinymceConfig = self.getConfig();
-
             setTimeout(function() {
-                tinyMCE.init(tinymceConfig);
+                tinyMCE.init(self.getConfig());
             }, 0);
         };
 
