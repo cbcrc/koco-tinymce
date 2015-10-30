@@ -9,24 +9,10 @@ define([
     function(ko, $, urls, tinymceEvents, tinymceUtilities, tinyMCE) {
         'use strict';
 
-        var TinymceBaseBindingHandler = function() {
+        var TinymceBaseBindingHandler = function(element, valueAccessor, allBindingsAccessor, viewModel, context) {
             var self = this;
 
-            self.IsInitialized = false;
-
-            //variable that are available after initialisation
-            self.$textArea;
-            self.$buffer;
-            self.valueObservable;
-            self.tinymceid;
-            self.allBindings;
-            self.canEditHtml;
-            self.tinymceConfig;
-        };
-
-        TinymceBaseBindingHandler.prototype.init = function(element, valueAccessor, allBindingsAccessor, viewModel, context) {
-            var self = this;
-
+            self.element = element; 
             self.$textArea = $(element);
             self.$buffer = $('<div>');
             self.valueObservable = valueAccessor();
@@ -44,29 +30,15 @@ define([
             setTimeout(function() {
                 tinyMCE.init(tinymceConfig);
             }, 0);
-
-            ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
-                self.dispose(element);
-            });
-
-            self.onInit(element, valueAccessor, allBindingsAccessor, viewModel, context);
-
-            self.IsInitialized = true;
         };
 
-        TinymceBaseBindingHandler.prototype.onInit = function( /*element, valueAccessor, allBindingsAccessor , viewModel, context*/ ) {
-            //var self = this;
-
-            //extension point fot initialization
-        };
-
-        TinymceBaseBindingHandler.prototype.dispose = function(element) {
+        TinymceBaseBindingHandler.prototype.dispose = function() {
             var self = this;
 
             //tinyMCE.execCommand('mceRemoveControl', false, element.id);
-            var editor = tinyMCE.get(element.id);
-            tinyMCE.execCommand('mceFocus', false, element.id);
-            tinyMCE.execCommand('mceRemoveControl', true, element.id);
+            var editor = tinyMCE.get(self.element.id);
+            tinyMCE.execCommand('mceFocus', false, self.element.id);
+            tinyMCE.execCommand('mceRemoveControl', true, self.element.id);
             editor.remove();
 
             self.$textArea.remove();
