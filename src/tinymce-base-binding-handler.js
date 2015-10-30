@@ -12,7 +12,7 @@ define([
         var TinymceBaseBindingHandler = function(element, valueAccessor, allBindingsAccessor, viewModel, context) {
             var self = this;
 
-            self.element = element; 
+            self.element = element;
             self.$textArea = $(element);
             self.$buffer = $('<div>');
             self.valueObservable = valueAccessor();
@@ -68,8 +68,13 @@ define([
         TinymceBaseBindingHandler.prototype.tinymceSetup = function(editor) {
             var self = this;
 
-            editor.onChange.add(self.tinymceOnContentChanged);
-            editor.onInit.add(self.tinymceOnInit);
+            editor.onChange.add(function(editor) {
+                self.tinymceOnContentChanged(editor);
+            });
+            
+            editor.onInit.add(function(editor) {
+                self.tinymceOnInit(editor);
+            });
         };
 
         TinymceBaseBindingHandler.prototype.tinymceOnInit = function(editor) {
