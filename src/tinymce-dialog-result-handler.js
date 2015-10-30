@@ -15,7 +15,7 @@ define(['jquery', 'tinymce-utilities', 'string-utilities'],
             }
 
             var selectedNode = getCurrentNodeOrClosestFigure(this.editor);
-            var newElement = tinymceUtilities.toTinyMceMarkup(markup, this.editor);
+            var newElement = tinymceUtilities.toTinymceMarkup(markup, this.editor);
             replaceElement(this.editor, selectedNode, newElement);
         };
 

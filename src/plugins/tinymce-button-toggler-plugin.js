@@ -1,7 +1,7 @@
 // Copyright (c) CBC/Radio-Canada. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-define(['../button-toggler', 'tinymce'],
+define(['tinymce-button-toggler', 'tinymce'],
     function(ButtonToggler, tinyMCE) {
         'use strict';
 

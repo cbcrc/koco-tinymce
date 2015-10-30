@@ -1,7 +1,7 @@
 // Copyright (c) CBC/Radio-Canada. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-define(['./mce-plugin-factory', '../dialog-result-handler', 'dialoger'],
+define(['tinymce-plugin-factory', 'tinymce-dialog-result-handler', 'dialoger'],
     function(puglinFactory, DialogResultHandler, dialoger) {
         'use strict';
 

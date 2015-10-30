@@ -1,7 +1,7 @@
 // Copyright (c) CBC/Radio-Canada. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-define(['../dialog-result-handler', 'string-utilities', 'tinymce'],
+define(['tinymce-dialog-result-handler', 'string-utilities', 'tinymce'],
     function(DialogResultHandler, stringUtilities, tinymce) {
         'use strict';
 

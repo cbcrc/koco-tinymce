@@ -4,7 +4,7 @@
 define([
         'jquery',
         'url-utilities',
-        './mce-plugin-factory',
+        'tinymce-plugin-factory',
         'dialoger'
     ],
     function($, urls, mcePluginFactory, dialoger) {

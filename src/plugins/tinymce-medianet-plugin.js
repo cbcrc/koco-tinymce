@@ -4,7 +4,7 @@
 define([
         'jquery',
         'url-utilities',
-        './mce-dialog-factory',
+        'tinymce-dialog-factory',
         'image-utilities',
         'resource-utilities',
         'moment'

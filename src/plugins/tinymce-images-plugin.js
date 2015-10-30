@@ -4,7 +4,7 @@
 define([
         'jquery',
         'url-utilities',
-        './mce-dialog-factory',
+        'tinymce-dialog-factory',
         'array-utilities'
     ],
     function($, urls, mceDialogFactory, arrayUtilities) {

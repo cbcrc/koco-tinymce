@@ -4,7 +4,7 @@ define(['jquery', 'url-utilities', 'tinymce'],
 
         var TinymceUtilities = function TinymceUtilities() {};
 
-        TinymceUtilities.prototype.clearContentFromTinyMceSpecificMarkup = function(text) {
+        TinymceUtilities.prototype.clearContentFromTinymceSpecificMarkup = function(text) {
             var $buffer = $('<div>');
             $buffer.html(text);
             $buffer.find('.articleBody').removeClass('articleBody');
@@ -17,12 +17,12 @@ define(['jquery', 'url-utilities', 'tinymce'],
             return result;
         };
 
-        TinymceUtilities.prototype.cleanTinyMceMarkup = function(tinyMceMarkup, $buffer) {
-            if (tinyMceMarkup === '&nbsp;') { //bugfix IE10
+        TinymceUtilities.prototype.cleanTinymceMarkup = function(tinymceMarkup, $buffer) {
+            if (tinymceMarkup === '&nbsp;') { //bugfix IE10
                 return '';
             }
 
-            $buffer.html(tinyMceMarkup);
+            $buffer.html(tinymceMarkup);
             removeAllClassesRelatedToNonEditablePlugin($buffer);
             replaceQuotes($buffer);
             replaceFakeSpans($buffer);
@@ -72,7 +72,7 @@ define(['jquery', 'url-utilities', 'tinymce'],
                 .replace(/(\s|&nbsp;)*(»|&raquo;)/g, '&nbsp;&raquo;');
         }
 
-        TinymceUtilities.prototype.toTinyMceMarkup = function(rawMarkup, editor) {
+        TinymceUtilities.prototype.toTinymceMarkup = function(rawMarkup, editor) {
             var $buffer = $('<div>');
             var markup = rawMarkup.replace(/&nbsp;/gi, '<img data-nonbreaking src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="nonbreaking' +
                 ((!editor.plugins.advvisualchars || !editor.plugins.advvisualchars.state) ? ' hidden' : '') + '"/>');
@@ -86,7 +86,7 @@ define(['jquery', 'url-utilities', 'tinymce'],
             $buffer.find('blockquote > footer > span')
                 .addClass('mceEditable')
                 .each(function() {
-                    //les span empêchent le plugin tinyMce/noneditable de fonctionner correctement
+                    //les span empêchent le plugin tinymce/noneditable de fonctionner correctement
                     replaceTag(this, '<p>');
                 });
 

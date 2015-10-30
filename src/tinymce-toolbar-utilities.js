@@ -11,15 +11,15 @@ define(['jquery', 'router', 'dialoger', 'tinymce'],
                 var $container = $textArea.parent();
                 var $tinymceEndMarker = getNextElement($container);
 
-                var $tinyMceBody = $container.find('#' + $textArea[0].id + '_tbl'),
-                    $tinyMceToolbarBody = $container.find('#' + $textArea[0].id + '_external'),
-                    $tinyMceToolbar = $tinyMceToolbarBody.parent();
+                var $tinymceBody = $container.find('#' + $textArea[0].id + '_tbl'),
+                    $tinymceToolbarBody = $container.find('#' + $textArea[0].id + '_external'),
+                    $tinymceToolbar = $tinymceToolbarBody.parent();
 
-                $tinyMceToolbarBody.css({
+                $tinymceToolbarBody.css({
                     'display': 'block',
                     'position': 'static'
                 });
-                $tinyMceToolbar.addClass('defaultSkin');
+                $tinymceToolbar.addClass('defaultSkin');
                 moveToolbarToTop();
 
                 $container.find('#' + $textArea[0].id + '_external_close').remove();
@@ -28,8 +28,8 @@ define(['jquery', 'router', 'dialoger', 'tinymce'],
                 });
 
                 $window.resize(function() {
-                    if ($tinyMceBody.width() != $tinyMceToolbar.width()) {
-                        $tinyMceToolbar.width($tinyMceBody.width());
+                    if ($tinymceBody.width() != $tinymceToolbar.width()) {
+                        $tinymceToolbar.width($tinymceBody.width());
                     }
                 });
 
@@ -61,7 +61,7 @@ define(['jquery', 'router', 'dialoger', 'tinymce'],
                             if (direction === 'down' && !isTopIntoView($container)) {
                                 moveToolbarToBottom();
                             } else {
-                                if (!$tinyMceToolbar.hasClass('editor-toolbar-top')) {
+                                if (!$tinymceToolbar.hasClass('editor-toolbar-top')) {
                                     floatToolbar();
                                 }
                             }
@@ -88,45 +88,45 @@ define(['jquery', 'router', 'dialoger', 'tinymce'],
                 }
 
                 function moveToolbarToTop() {
-                    $tinyMceToolbar.css({
+                    $tinymceToolbar.css({
                         'position': 'static',
                         'width': '100%'
                     });
-                    $container.prepend($tinyMceToolbar);
-                    $tinyMceToolbarBody.css({
+                    $container.prepend($tinymceToolbar);
+                    $tinymceToolbarBody.css({
                         'border-bottom': '0',
                         'border-top': '1px solid #CCC'
                     });
-                    $tinyMceToolbar.addClass('editor-toolbar-top');
-                    $tinyMceToolbar.removeClass('editor-toolbar-float editor-toolbar-bottom');
+                    $tinymceToolbar.addClass('editor-toolbar-top');
+                    $tinymceToolbar.removeClass('editor-toolbar-float editor-toolbar-bottom');
                 }
 
                 function floatToolbar() {
-                    $tinyMceToolbar.css({
+                    $tinymceToolbar.css({
                         'position': 'fixed',
                         'top': getTopOffset(true),
-                        'width': $tinyMceBody.width()
+                        'width': $tinymceBody.width()
                     });
-                    $tinyMceToolbarBody.css({
+                    $tinymceToolbarBody.css({
                         'border-bottom': '1px solid #CCC',
                         'border-top': '0'
                     });
-                    $tinyMceToolbar.addClass('editor-toolbar-float');
-                    $tinyMceToolbar.removeClass('editor-toolbar-top editor-toolbar-bottom');
+                    $tinymceToolbar.addClass('editor-toolbar-float');
+                    $tinymceToolbar.removeClass('editor-toolbar-top editor-toolbar-bottom');
                 }
 
                 function moveToolbarToBottom() {
-                    $tinyMceToolbar.css({
+                    $tinymceToolbar.css({
                         'position': 'static',
                         'width': '100%'
                     });
-                    $container.append($tinyMceToolbar);
-                    $tinyMceToolbarBody.css({
+                    $container.append($tinymceToolbar);
+                    $tinymceToolbarBody.css({
                         'border-bottom': '1px solid #CCC',
                         'border-top': '0'
                     });
-                    $tinyMceToolbar.addClass('editor-toolbar-bottom');
-                    $tinyMceToolbar.removeClass('editor-toolbar-top editor-toolbar-float');
+                    $tinymceToolbar.addClass('editor-toolbar-bottom');
+                    $tinymceToolbar.removeClass('editor-toolbar-top editor-toolbar-float');
 
                     //stop flickering... bug IE8
                     if (tinyMCE.isIE8) {
