@@ -75,6 +75,10 @@ define([
             editor.onInit.add(function(editor) {
                 self.tinymceOnInit(editor);
             });
+
+            editor.onPostRender.add(function(editor) {
+                self.tinymceOnPostRender(editor);
+            });
         };
 
         TinymceBaseBindingHandler.prototype.tinymceOnInit = function(editor) {
@@ -82,6 +86,14 @@ define([
 
             self.valueObservable.tinymce = editor;
             self.updateContent(editor);
+        };
+
+        TinymceBaseBindingHandler.prototype.tinymceOnPostRender = function(editor) {
+            var self = this;
+
+            if(self.allBindings.editorInitializationDeferred){
+                self.allBindings.editorInitializationDeferred.resolve();
+            }
         };
 
         TinymceBaseBindingHandler.prototype.updateContent = function(editor) {
