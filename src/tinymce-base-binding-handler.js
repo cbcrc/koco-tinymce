@@ -68,7 +68,11 @@ define([
         TinymceBaseBindingHandler.prototype.tinymceSetup = function(editor) {
             var self = this;
 
+            //on change is only called on lost focus but we need live feedback, so we also use onKeyUp
             editor.onChange.add(function(editor) {
+                self.tinymceOnContentChanged(editor);
+            });
+            editor.onKeyUp.add(function(editor) {
                 self.tinymceOnContentChanged(editor);
             });
             
