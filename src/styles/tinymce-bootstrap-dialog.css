@@ -9,11 +9,11 @@ body {
 }
 
 label, input, button, select, textarea,
-input[type="text"], input[type="password"], 
-input[type="datetime"], input[type="datetime-local"], 
-input[type="date"], input[type="month"], input[type="time"], input[type="week"], 
-input[type="number"], input[type="email"], 
-input[type="url"], input[type="search"], 
+input[type="text"], input[type="password"],
+input[type="datetime"], input[type="datetime-local"],
+input[type="date"], input[type="month"], input[type="time"], input[type="week"],
+input[type="number"], input[type="email"],
+input[type="url"], input[type="search"],
 input[type="tel"], input[type="color"] {
     font-size: 11px;
     line-height: 14px;
@@ -26,11 +26,11 @@ select {
 }
 
 textarea,
-input[type="text"], input[type="password"], 
-input[type="datetime"], input[type="datetime-local"], 
-input[type="date"], input[type="month"], input[type="time"], input[type="week"], 
-input[type="number"], input[type="email"], 
-input[type="url"], input[type="search"], 
+input[type="text"], input[type="password"],
+input[type="datetime"], input[type="datetime-local"],
+input[type="date"], input[type="month"], input[type="time"], input[type="week"],
+input[type="number"], input[type="email"],
+input[type="url"], input[type="search"],
 input[type="tel"], input[type="color"] {
     height: 14px;
     padding: 2px 4px;

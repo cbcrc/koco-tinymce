@@ -68,8 +68,8 @@ define(['jquery', 'url-utilities', 'tinymce'],
 
         function normalizeQuotesWithNonBreakingSpaces(html) {
             return html
-                .replace(/(«|&laquo;)(\s|&nbsp;)*/g, '&laquo;&nbsp;')
-                .replace(/(\s|&nbsp;)*(»|&raquo;)/g, '&nbsp;&raquo;');
+                .replace(/(Â«|&laquo;)(\s|&nbsp;)*/g, '&laquo;&nbsp;')
+                .replace(/(\s|&nbsp;)*(Â»|&raquo;)/g, '&nbsp;&raquo;');
         }
 
         TinymceUtilities.prototype.toTinymceMarkup = function(rawMarkup, editor) {
@@ -86,7 +86,7 @@ define(['jquery', 'url-utilities', 'tinymce'],
             $buffer.find('blockquote > footer > span')
                 .addClass('mceEditable')
                 .each(function() {
-                    //les span empêchent le plugin tinymce/noneditable de fonctionner correctement
+                    //les span empÃªchent le plugin tinymce/noneditable de fonctionner correctement
                     replaceTag(this, '<p>');
                 });
 

@@ -75,7 +75,7 @@ define([
             editor.onKeyUp.add(function(editor) {
                 self.tinymceOnContentChanged(editor);
             });
-            
+
             editor.onInit.add(function(editor) {
                 self.tinymceOnInit(editor);
             });
