@@ -1,12 +1,12 @@
 {
   "name": "koco-tinymce",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "homepage": "https://github.com/cbcrc/koco-tinymce",
   "authors": [
     "Mark Moyes <mark.moyes@cbc.ca>",
     "Maxime Séguin <maxime.forget-seguin@radio-canada.ca>"
   ],
-  "description": "Knockout Components handlers and utililities for the TinyMCE editor",
+  "description": "Knockout Components handlers and utilities for the TinyMCE editor",
   "main": "",
   "moduleType": [
     "amd"
