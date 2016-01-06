@@ -26,7 +26,7 @@ define(['jquery', 'url-utilities', 'tinymce'],
             removeAllClassesRelatedToNonEditablePlugin($buffer);
             replaceQuotes($buffer);
             replaceFakeSpans($buffer);
-            replaceNonBreakingSpaces($buffer);
+            replaceNonBreakingSpaceImages($buffer);
 
             return normalizeQuotesWithNonBreakingSpaces($buffer.html());
         };
@@ -62,7 +62,7 @@ define(['jquery', 'url-utilities', 'tinymce'],
                 });
         }
 
-        function replaceNonBreakingSpaces($buffer) {
+        function replaceNonBreakingSpaceImages($buffer) {
             $buffer.find('.nonbreaking').replaceWith('&nbsp;');
         }
 
@@ -72,12 +72,11 @@ define(['jquery', 'url-utilities', 'tinymce'],
                 .replace(/(\s|&nbsp;)*(»|&raquo;)/g, '&nbsp;&raquo;');
         }
 
-        TinymceUtilities.prototype.toTinymceMarkup = function(rawMarkup, editor) {
-            var $buffer = $('<div>');
-            var markup = rawMarkup.replace(/&nbsp;/gi, '<img data-nonbreaking src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="nonbreaking' +
-                ((!editor.plugins.advvisualchars || !editor.plugins.advvisualchars.state) ? ' hidden' : '') + '"/>');
+        TinymceUtilities.prototype.toTinymceMarkup = function(markup, editor) {
+            var $buffer = $('<div>').html(markup);
 
-            $buffer.html(markup);
+            replaceNonBreakingSpaces($buffer, editor);
+
             $buffer.find('figure, blockquote')
                 .addClass('mceNonEditable');
             $buffer.find('blockquote > p')
@@ -98,6 +97,32 @@ define(['jquery', 'url-utilities', 'tinymce'],
 
             return $buffer.html();
         };
+
+        function replaceNonBreakingSpaces($buffer, editor) {
+            var nonBreakingSpace = /(?:&nbsp;|\u00a0)/;
+            var nonBreakingSpaceImage = '<img data-nonbreaking src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="nonbreaking' +
+                ((!editor.plugins.advvisualchars || !editor.plugins.advvisualchars.state) ? ' hidden' : '') + '" />';
+
+            var textNodesWithNonBreakingSpaces = $buffer.find(':not(iframe)').addBack().contents().filter(function() {
+                return this.nodeType === 3 && nonBreakingSpace.test(this.textContent);
+            });
+
+            textNodesWithNonBreakingSpaces.each(function() {
+                var textParts = this.textContent.split(nonBreakingSpace);
+
+                var buffer = $('<div>');
+                for (var i = 0; i < textParts.length; ++i) {
+                    // We have to do this to parse out user-entered HTML
+                    buffer.append(document.createTextNode(textParts[i]));
+
+                    if (i+1 !== textParts.length) {
+                        buffer.append(nonBreakingSpaceImage);
+                    }
+                }
+
+                $(this).replaceWith(buffer.contents());
+            });
+        }
 
         function allowEditingEmptyQuote() {
             if (!this.innerHTML || this.innerHTML.match(/$\s*^/m)) {
