@@ -245,6 +245,8 @@ define([
                     contentItemSummary.legacy.resourceType = resourceUtilities.resourceTypes.video;
                 } else if (figure.hasClass('track')) {
                     contentItemSummary.legacy.resourceType = resourceUtilities.resourceTypes.track;
+                } else if (figure.hasClass('webradio')) {
+                    contentItemSummary.legacy.resourceType = resourceUtilities.resourceTypes.webradio;
                 }
             }
 
@@ -275,6 +277,9 @@ define([
                     break;
                 case resourceUtilities.resourceTypes.track:
                     cssClass = 'track';
+                    break;
+                case resourceUtilities.resourceTypes.webradio:
+                    cssClass = 'webradio';
                     break;
             }
 

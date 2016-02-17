@@ -27,7 +27,7 @@
   "dependencies": {
     "koco-dialoger": ">=0.2.3",
     "koco-image-utilities": ">=0.1.1",
-    "koco-resource-utilities": ">=0.1.0",
+    "koco-resource-utilities": ">=0.2.1",
     "koco-url-utilities": ">=0.1.7",
     "rangy": "~1.3.0"
   }
