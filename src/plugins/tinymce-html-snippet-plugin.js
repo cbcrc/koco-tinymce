@@ -50,7 +50,8 @@ define([
 
             return {
                 isPredefinedSnippetsShown: true,
-                snippetBody: snippetBody
+                snippetBody: snippetBody,
+                divisionId: ed.settings.divisionId
             };
         }
     });

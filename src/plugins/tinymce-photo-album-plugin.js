@@ -75,7 +75,8 @@ define([
                     targetId: Number($figure.attr('data-id')),
                     title: title,
                     authorName: null
-                }
+                },
+                divisionId: ed.settings.divisionId
             };
         }
     });

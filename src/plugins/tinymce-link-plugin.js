@@ -40,7 +40,7 @@ define([
 
         function fromMarkupToDialogInput(ed) {
             var node = ed.selection.getNode();
-            var dialogInput = { title: '', text: '', url: '' };
+            var dialogInput = { title: '', text: '', url: '', divisionId: ed.settings.divisionId };
 
             if (node) {
                 var $node = $(node);
