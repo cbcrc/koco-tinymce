@@ -36,10 +36,12 @@ define([
             }
 
             return {
-                contentType: {
-                    id: $figure.attr('data-content-type-id')
+                externalMultimedia: {
+                    contentType: {
+                        id: $figure.attr('data-content-type-id')
+                    },
+                    id: $figure.attr('data-content-id')
                 },
-                id: $figure.attr('data-content-id'),
                 divisionId: ed.settings.divisionId
             };
         }
