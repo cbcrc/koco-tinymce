@@ -185,7 +185,7 @@ define(['jquery', 'url-utilities', 'tinymce', 'rangy'],
                 } else if ($closestFigure.hasClass('medianet')) {
                     ed.execCommand('mceMedianet', false);
                 } else if ($closestFigure.hasClass('embed')) {
-                    ed.execCommand('mceExternalMedia', false);
+                    ed.execCommand('mceExternalMultimediaContent', false);
                 } else if ($closestFigure.hasClass('snippet')) {
                     ed.execCommand('mceHtmlSnippet', false);
                 }
