@@ -3,11 +3,12 @@
 
 define([
         'jquery',
+        'knockout',
         'url-utilities',
         'tinymce-dialog-factory',
         'array-utilities'
     ],
-    function($, urls, mceDialogFactory, arrayUtilities) {
+    function($, ko, urls, mceDialogFactory, arrayUtilities) {
         'use strict';
 
         return mceDialogFactory.createMcePlugin({
@@ -84,7 +85,7 @@ define([
             var node = ed.selection.getNode();
             var $figure = $(node).closest('figure.image');
             var result = {
-                settings: ed.settings.imagesDialogSettings
+                settings: ko.toJS(ed.settings.imagesDialogSettings)
             };
 
             if ($figure.length > 0) {

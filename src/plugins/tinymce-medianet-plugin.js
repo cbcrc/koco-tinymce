@@ -3,13 +3,14 @@
 
 define([
         'jquery',
+        'knockout',
         'url-utilities',
         'tinymce-dialog-factory',
         'image-utilities',
         'resource-utilities',
         'moment'
     ],
-    function($, urls, mceDialogFactory, imageUtilities, resourceUtilities, moment) {
+    function($, ko, urls, mceDialogFactory, imageUtilities, resourceUtilities, moment) {
         'use strict';
 
         function fromDialogResultToMarkup(dialogResult) {
@@ -167,7 +168,7 @@ define([
             var figure = $(ed.selection.getNode()).closest('figure.medianet'),
                 isResourceSelected = figure.length > 0,
                 contentItemSummary = null,
-                result = $.extend({}, ed.settings.medianetDialogSettings);
+                result = $.extend({}, ko.toJS(ed.settings.medianetDialogSettings));
 
             result.imagesDialogSettings = ed.settings.imagesDialogSettings;
 
