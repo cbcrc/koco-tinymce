@@ -84,8 +84,7 @@ define([
             var node = ed.selection.getNode();
             var $figure = $(node).closest('figure.image');
             var result = {
-                settings: ed.settings.imagesDialogSettings,
-                divisionId: ed.settings.divisionId
+                settings: ed.settings.imagesDialogSettings
             };
 
             if ($figure.length > 0) {

@@ -41,8 +41,7 @@ define([
                         id: $figure.attr('data-content-type-id')
                     },
                     id: $figure.attr('data-content-id')
-                },
-                divisionId: ed.settings.divisionId
+                }
             };
         }
 

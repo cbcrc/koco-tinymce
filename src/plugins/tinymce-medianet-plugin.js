@@ -167,7 +167,7 @@ define([
             var figure = $(ed.selection.getNode()).closest('figure.medianet'),
                 isResourceSelected = figure.length > 0,
                 contentItemSummary = null,
-                result = $.extend({ divisionId: ed.settings.divisionId }, ed.settings.medianetDialogSettings);
+                result = $.extend({}, ed.settings.medianetDialogSettings);
 
             result.imagesDialogSettings = ed.settings.imagesDialogSettings;
 
