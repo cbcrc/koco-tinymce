@@ -170,7 +170,7 @@ define([
                 contentItemSummary = null,
                 result = $.extend({}, ko.toJS(ed.settings.medianetDialogSettings));
 
-            result.imagesDialogSettings = ed.settings.imagesDialogSettings;
+            result.imagesDialogSettings = ko.toJS(ed.settings.imagesDialogSettings);
 
             if (isResourceSelected) {
                 contentItemSummary = {
