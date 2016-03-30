@@ -48,17 +48,17 @@ define(['jquery', 'url-utilities', 'tinymce'],
                     }
                 });
 
-            $buffer.find('blockquote > footer > p:first-child')
+            sortByDepthFirst($buffer.find('blockquote > footer > p:first-child'))
                 .each(function() {
-                    replaceTag(this, '<span>');
+                    replaceTag(this, 'span');
                 });
         }
 
         function replaceFakeSpans($buffer) {
-            $buffer.find('.fakespan')
+            sortByDepthFirst($buffer.find('.fakespan'))
                 .removeClass('fakespan')
                 .each(function() {
-                    replaceTag(this, '<span>');
+                    replaceTag(this, 'span');
                 });
         }
 
@@ -72,6 +72,25 @@ define(['jquery', 'url-utilities', 'tinymce'],
                 .replace(/(\s|&nbsp;)*(»|&raquo;)/g, '&nbsp;&raquo;');
         }
 
+        function sortByDepthFirst($elements) {
+            var elementsAndDepth = $elements.map(function() {
+                return {
+                    depth: $(this).parents().length,
+                    element: this
+                };
+            }).get();
+
+            elementsAndDepth.sort(function(a, b) {
+                return b.depth - a.depth;
+            });
+
+            var result = elementsAndDepth.map(function(elementAndDepth) {
+                return elementAndDepth.element;
+            });
+
+            return $(result);
+        }
+
         TinymceUtilities.prototype.toTinymceMarkup = function(markup, editor) {
             var $buffer = $('<div>').html(markup);
 
@@ -82,17 +101,17 @@ define(['jquery', 'url-utilities', 'tinymce'],
             $buffer.find('blockquote > p')
                 .addClass('mceEditable')
                 .each(allowEditingEmptyQuote);
-            $buffer.find('blockquote > footer > span')
+            sortByDepthFirst($buffer.find('blockquote > footer > span'))
                 .addClass('mceEditable')
                 .each(function() {
                     //les span empêchent le plugin tinymce/noneditable de fonctionner correctement
-                    replaceTag(this, '<p>');
+                    replaceTag(this, 'p');
                 });
 
-            $buffer.find('figcaption span')
+            sortByDepthFirst($buffer.find('figcaption span'))
                 .addClass('fakespan')
                 .each(function() {
-                    replaceTag(this, '<div>');
+                    replaceTag(this, 'div');
                 });
 
             return $buffer.html();
@@ -115,7 +134,7 @@ define(['jquery', 'url-utilities', 'tinymce'],
                     // We have to do this to parse out user-entered HTML
                     buffer.append(document.createTextNode(textParts[i]));
 
-                    if (i+1 !== textParts.length) {
+                    if (i + 1 !== textParts.length) {
                         buffer.append(nonBreakingSpaceImage);
                     }
                 }
@@ -130,18 +149,17 @@ define(['jquery', 'url-utilities', 'tinymce'],
             }
         }
 
-        function replaceTag(currentElem, newTagObj) {
-            var $currentElem = $(currentElem);
-            var $newTag = $(newTagObj).clone();
-            var newTag = $newTag[0];
+        function replaceTag(element, newTagName) {
+            var newElement = document.createElement(newTagName);
+            newElement.className = element.className;
+            newElement.innerHTML = element.innerHTML;
+            for (var i = element.attributes.length - 1; i >= 0; i--) {
+                var attr = element.attributes[i];
+                newElement.setAttribute(attr.nodeName, attr.nodeValue);
+            }
 
-            newTag.className = currentElem.className;
-            $.each($currentElem.prop('attributes'), function() {
-                $newTag.attr(this.name, this.value);
-            });
-
-            $currentElem.wrapAll($newTag);
-            $currentElem.contents().unwrap();
+            element.parentNode.insertBefore(newElement, element);
+            element.parentNode.removeChild(element);
         }
 
         TinymceUtilities.prototype.isInternetExplorer = function() {
