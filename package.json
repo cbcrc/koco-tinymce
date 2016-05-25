@@ -18,11 +18,17 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "koco-dialoger": ">=0.2.3",
-    "koco-image-utilities": ">=0.1.1",
-    "koco-resource-utilities": ">=0.2.1",
-    "koco-url-utilities": ">=0.1.7",
-    "koco-string-utilities": ">=0.1.7",
+    "koco": "^1.0.0",
+    "koco-dialoger": ">=1.1.0",
+    "koco-image-utilities": ">=1.1.0",
+    "koco-resource-utilities": ">=1.1.0",
+    "koco-string-utilities": ">=1.1.0",
+    "koco-url-utilities": ">=1.1.0",
     "rangy": "~1.3.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-0": "^6.5.0"
   }
 }
