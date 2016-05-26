@@ -1,27 +1,15 @@
-'use strict';
+// Copyright (c) CBC/Radio-Canada. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
+import $ from 'jquery';
+import urls from 'koco-url-utilities';
+import mceDialogFactory from 'tinymce-dialog-factory';
 
-var _jquery = require('jquery');
 
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _urlUtilities = require('url-utilities');
-
-var _urlUtilities2 = _interopRequireDefault(_urlUtilities);
-
-var _tinymceDialogFactory = require('tinymce-dialog-factory');
-
-var _tinymceDialogFactory2 = _interopRequireDefault(_tinymceDialogFactory);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _tinymceDialogFactory2.default.createMcePlugin({
+export default mceDialogFactory.createMcePlugin({
     pluginName: 'externalMultimediaContent',
-    title: 'Insérer/éditer un contenu multimédia externe',
-    image: _urlUtilities2.default.url('/images/vimeo.png'),
+    title: 'Ins\u00e9rer/\u00e9diter un contenu multim\u00e9dia externe',
+    image: urls.url('/images/vimeo.png'),
     pluginInfo: {
         longname: 'External multimedia content plugin',
         author: 'Plate-forme',
@@ -30,17 +18,17 @@ exports.default = _tinymceDialogFactory2.default.createMcePlugin({
     fromDialogResultToMarkup: fromDialogResultToMarkup,
     fromMarkupToDialogInput: fromMarkupToDialogInput,
     dialog: 'external-multimedia-content'
-}); // Copyright (c) CBC/Radio-Canada. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+});
 
 function fromMarkupToDialogInput(ed) {
-    var $figure = (0, _jquery2.default)(ed.selection.getNode()).closest('figure.embed');
+    var $figure = $(ed.selection.getNode()).closest('figure.embed');
 
     if ($figure.length === 0) {
         return null;
     }
 
-    if (!$figure.attr('data-content-type-id') || !$figure.attr('data-content-id')) {
+    if (!$figure.attr('data-content-type-id') ||
+        !$figure.attr('data-content-id')) {
         throw 'external multimedia content sans attributs data-content-type-id et data-content-id n\'est pas supporté.';
     }
 
@@ -112,7 +100,8 @@ function generateVimeoFigure(dialogResult) {
 function generateExternalMultimediaContentFigure(dialogResult, embed) {
     //respecter la structure pour ne pas briser les transformations vers le xml de ghtml, mais ajouter data-content-type-id et data-content-id
     var url = parseUrlFromEmbed(embed);
-    var result = '<figure itemprop="associatedMedia" itemscope="itemscope" itemtype="http://schema.org/MediaObject" itemid="' + url + '" class="associatedMedia embed mceNonEditable" data-content-type-id=' + dialogResult.contentType.id + ' data-content-id=' + dialogResult.id + '><div class="placeholder">' + embed + '&nbsp;</div></figure>';
+    var result =
+        '<figure itemprop="associatedMedia" itemscope="itemscope" itemtype="http://schema.org/MediaObject" itemid="' + url + '" class="associatedMedia embed mceNonEditable" data-content-type-id=' + dialogResult.contentType.id + ' data-content-id=' + dialogResult.id + '><div class="placeholder">' + embed + '&nbsp;</div></figure>';
     return result;
 }
 

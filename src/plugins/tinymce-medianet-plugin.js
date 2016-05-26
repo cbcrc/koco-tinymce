@@ -5,7 +5,7 @@ import $ from 'jquery';
 import ko from 'knockout';
 import urls from 'koco-url-utilities';
 import mceDialogFactory from 'tinymce-dialog-factory';
-import imageUtilities from from 'koco-image-utilities';
+import imageUtilities from 'koco-image-utilities';
 import resourceUtilities from 'koco-resource-utilities';
 import moment from 'moment';
 

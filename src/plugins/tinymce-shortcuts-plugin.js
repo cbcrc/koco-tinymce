@@ -4,7 +4,7 @@
 import $ from 'jquery';
 import urls from 'koco-url-utilities';
 import mcePluginFactory from 'tinymce-plugin-factory';
-import dialoger from 'dialoger';
+import dialoger from 'koco-dialoger';
 
 
 export default mcePluginFactory.createMcePlugin({

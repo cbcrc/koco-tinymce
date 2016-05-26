@@ -1,27 +1,15 @@
-'use strict';
+// Copyright (c) CBC/Radio-Canada. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
+import $ from 'jquery';
+import urls from 'koco-url-utilities';
+import mceDialogFactory from 'tinymce-dialog-factory';
 
-var _jquery = require('jquery');
 
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _urlUtilities = require('url-utilities');
-
-var _urlUtilities2 = _interopRequireDefault(_urlUtilities);
-
-var _tinymceDialogFactory = require('tinymce-dialog-factory');
-
-var _tinymceDialogFactory2 = _interopRequireDefault(_tinymceDialogFactory);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _tinymceDialogFactory2.default.createMcePlugin({
+export default mceDialogFactory.createMcePlugin({
     pluginName: 'linkCustom',
-    title: 'Insérer/éditer un hyperlien',
-    image: _urlUtilities2.default.url('/images/link.png'),
+    title: 'Ins\u00e9rer/\u00e9diter un hyperlien',
+    image: urls.url('/images/link.png'),
     pluginInfo: {
         longname: 'Hyperlien',
         author: 'Plate-forme',
@@ -30,11 +18,10 @@ exports.default = _tinymceDialogFactory2.default.createMcePlugin({
     fromDialogResultToMarkup: fromDialogResultToMarkup,
     fromMarkupToDialogInput: fromMarkupToDialogInput,
     dialog: 'link'
-}); // Copyright (c) CBC/Radio-Canada. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+});
 
 function fromDialogResultToMarkup(dialogResult) {
-    var $buffer = (0, _jquery2.default)('<div>');
+    var $buffer = $('<div>');
     $buffer.html(dialogResult.title);
     $buffer.find('.nonbreaking').replaceWith('&nbsp;');
 
@@ -55,7 +42,7 @@ function fromMarkupToDialogInput(ed) {
     };
 
     if (node) {
-        var $node = (0, _jquery2.default)(node);
+        var $node = $(node);
 
         if (!$node.is('a')) {
             var $a = $node.closest('a');
@@ -93,7 +80,7 @@ function getContent(ed) {
     var content = ed.selection.getContent();
 
     if (content) {
-        var $content = (0, _jquery2.default)(jQuerySelectorEscape(content));
+        var $content = $(jQuerySelectorEscape(content));
 
         /* Bug IE8 */
         if ($content.length === 1 && $content[0].nodeName === 'P') {

@@ -1,27 +1,15 @@
-'use strict';
+// Copyright (c) CBC/Radio-Canada. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
+import $ from 'jquery';
+import urls from 'koco-url-utilities';
+import mceDialogFactory from 'tinymce-dialog-factory';
 
-var _jquery = require('jquery');
 
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _urlUtilities = require('url-utilities');
-
-var _urlUtilities2 = _interopRequireDefault(_urlUtilities);
-
-var _tinymceDialogFactory = require('tinymce-dialog-factory');
-
-var _tinymceDialogFactory2 = _interopRequireDefault(_tinymceDialogFactory);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _tinymceDialogFactory2.default.createMcePlugin({
+export default mceDialogFactory.createMcePlugin({
     pluginName: 'htmlSnippet',
-    title: 'Insérer un fragment de code HTML',
-    image: _urlUtilities2.default.url('/images/snippet.png'),
+    title: 'Ins\u00e9rer un fragment de code HTML',
+    image: urls.url('/images/snippet.png'),
     pluginInfo: {
         longname: 'Html snippet plugin',
         author: 'Plate-forme',
@@ -30,8 +18,7 @@ exports.default = _tinymceDialogFactory2.default.createMcePlugin({
     fromDialogResultToMarkup: fromDialogResultToMarkup,
     fromMarkupToDialogInput: fromMarkupToDialogInput,
     dialog: 'html-snippets'
-}); // Copyright (c) CBC/Radio-Canada. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+});
 
 function fromDialogResultToMarkup(dialogResult) {
     var markup = '<figure class="snippet mceNonEditable">';
@@ -42,14 +29,18 @@ function fromDialogResultToMarkup(dialogResult) {
 }
 
 function fromMarkupToDialogInput(ed) {
-    var $figure = (0, _jquery2.default)(ed.selection.getNode()).closest('figure.snippet'),
+    var $figure = $(ed.selection.getNode()).closest('figure.snippet'),
         markup = '';
 
     if ($figure.length > 0) {
         markup = $figure.find('.placeholder').length > 0 ? $figure.find('.placeholder').html() : '';
     }
 
-    var snippetBody = markup.replace(/^(&nbsp;)+/gi, '').replace(/(&nbsp;)+$/gi, '').replace(/mce-text\//gi, 'text/').replace(/data-mce-src="[^"]*"/gi, '');
+    var snippetBody = markup
+        .replace(/^(&nbsp;)+/gi, '')
+        .replace(/(&nbsp;)+$/gi, '')
+        .replace(/mce-text\//gi, 'text/')
+        .replace(/data-mce-src="[^"]*"/gi, '');
 
     snippetBody = snippetBody.replace(/</gi, '\n<');
     snippetBody = snippetBody.replace(/^\n</i, '<');

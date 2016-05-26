@@ -3,7 +3,7 @@
 
 import puglinFactory from 'tinymce-plugin-factory';
 import DialogResultHandler from 'tinymce-dialog-result-handler';
-import dialoger from 'dialoger';
+import dialoger from 'koco-dialoger';
 
 
 export default {

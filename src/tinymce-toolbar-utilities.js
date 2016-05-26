@@ -3,7 +3,7 @@
 
 import $ from 'jquery';
 import router from 'router';
-import dialoger from 'dialoger';
+import dialoger from 'koco-dialoger';
 import tinyMCE from 'tinymce';
 
 
