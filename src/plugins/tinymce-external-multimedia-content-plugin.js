@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 import $ from 'jquery';
-import urls from 'url-utilities';
+import urls from 'koco-url-utilities';
 import mceDialogFactory from 'tinymce-dialog-factory';
 
 

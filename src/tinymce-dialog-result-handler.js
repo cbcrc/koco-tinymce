@@ -3,7 +3,7 @@
 
 import $ from 'jquery';
 import tinymceUtilities from 'tinymce-utilities';
-import stringUtilities from 'string-utilities';
+import stringUtilities from 'koco-string-utilities';
 
 
 var DialogResultHandler = function(editor) {

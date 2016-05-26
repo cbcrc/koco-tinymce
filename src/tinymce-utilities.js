@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import urls from 'url-utilities';
+import urls from 'koco-url-utilities';
 import tinyMCE from 'tinymce';
 
 

@@ -3,10 +3,10 @@
 
 import $ from 'jquery';
 import ko from 'knockout';
-import urls from 'url-utilities';
+import urls from 'koco-url-utilities';
 import mceDialogFactory from 'tinymce-dialog-factory';
-import imageUtilities from 'image-utilities';
-import resourceUtilities from 'resource-utilities';
+import imageUtilities from from 'koco-image-utilities';
+import resourceUtilities from 'koco-resource-utilities';
 import moment from 'moment';
 
 
