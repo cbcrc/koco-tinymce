@@ -1,22 +1,46 @@
-// Copyright (c) CBC/Radio-Canada. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+'use strict';
 
-import $ from 'jquery';
-import ko from 'knockout';
-import urls from 'koco-url-utilities';
-import mceDialogFactory from 'tinymce-dialog-factory';
-import imageUtilities from 'koco-image-utilities';
-import resourceUtilities from 'koco-resource-utilities';
-import moment from 'moment';
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _knockout = require('knockout');
+
+var _knockout2 = _interopRequireDefault(_knockout);
+
+var _kocoUrlUtilities = require('koco-url-utilities');
+
+var _kocoUrlUtilities2 = _interopRequireDefault(_kocoUrlUtilities);
+
+var _tinymceDialogFactory = require('tinymce-dialog-factory');
+
+var _tinymceDialogFactory2 = _interopRequireDefault(_tinymceDialogFactory);
+
+var _kocoImageUtilities = require('koco-image-utilities');
+
+var _kocoImageUtilities2 = _interopRequireDefault(_kocoImageUtilities);
+
+var _kocoResourceUtilities = require('koco-resource-utilities');
+
+var _kocoResourceUtilities2 = _interopRequireDefault(_kocoResourceUtilities);
+
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function fromDialogResultToMarkup(dialogResult) {
     var contentItemSummary = dialogResult,
-        isAudio = resourceUtilities.isAudioMedia(contentItemSummary.legacy.resourceType),
-        $figure = $('<figure>'),
-        $placeholder = $('<div>'),
+        isAudio = _kocoResourceUtilities2.default.isAudioMedia(contentItemSummary.legacy.resourceType),
+        $figure = (0, _jquery2.default)('<figure>'),
+        $placeholder = (0, _jquery2.default)('<div>'),
         meta,
-        $caption = $('<figcaption>'),
+        $caption = (0, _jquery2.default)('<figcaption>'),
         durationParts,
         hours,
         minutes,
@@ -27,9 +51,7 @@ function fromDialogResultToMarkup(dialogResult) {
         isAudio = true;
     }
 
-    $figure.attr('itemscope', 'itemscope')
-        .attr('itemtype', isAudio ? 'http://schema.org/AudioObject' : 'http://schema.org/VideoObject')
-        .attr('itemprop', 'associatedMedia');
+    $figure.attr('itemscope', 'itemscope').attr('itemtype', isAudio ? 'http://schema.org/AudioObject' : 'http://schema.org/VideoObject').attr('itemprop', 'associatedMedia');
 
     if (contentItemSummary.canonicalWebLink.href) {
         $figure.attr('itemid', contentItemSummary.canonicalWebLink.href);
@@ -41,17 +63,7 @@ function fromDialogResultToMarkup(dialogResult) {
         duration = contentItemSummary.summaryMultimediaItem.duration;
     }
 
-    $figure.attr('data-description', contentItemSummary.legacy.description)
-        .attr('data-zap', contentItemSummary.legacy.zap)
-        .attr('data-embed', true)
-        .attr('data-une', contentItemSummary.legacy.une)
-        .attr('data-cond', contentItemSummary.legacy.cond)
-        .attr('data-gui', contentItemSummary.legacy.gui)
-        .attr('data-duration', duration)
-        .attr('data-mce-contenteditable', false)
-        .addClass('associatedMedia medianet mceNonEditable')
-        .addClass(getResourceCssClass(contentItemSummary))
-        .addClass('align-' + contentItemSummary.legacy.align);
+    $figure.attr('data-description', contentItemSummary.legacy.description).attr('data-zap', contentItemSummary.legacy.zap).attr('data-embed', true).attr('data-une', contentItemSummary.legacy.une).attr('data-cond', contentItemSummary.legacy.cond).attr('data-gui', contentItemSummary.legacy.gui).attr('data-duration', duration).attr('data-mce-contenteditable', false).addClass('associatedMedia medianet mceNonEditable').addClass(getResourceCssClass(contentItemSummary)).addClass('align-' + contentItemSummary.legacy.align);
 
     if (contentItemSummary.legacy.applicationCode) {
         $figure.attr('data-application-code', contentItemSummary.legacy.applicationCode);
@@ -83,7 +95,7 @@ function fromDialogResultToMarkup(dialogResult) {
 
     if (contentItemSummary.publishedLastTimeAt) {
         $figure.attr('data-date-time', //TODO: Valider qu'on conserver le meme format que V1
-            moment.utc(contentItemSummary.publishedLastTimeAt).local().format('YYYY-MM-DDTHH:mm:ss'));
+        _moment2.default.utc(contentItemSummary.publishedLastTimeAt).local().format('YYYY-MM-DDTHH:mm:ss'));
     }
 
     if (duration) {
@@ -102,7 +114,7 @@ function fromDialogResultToMarkup(dialogResult) {
         if (seconds > 0) {
             isoDuration += seconds + 'S';
         }
-        meta = $('<meta>').attr('itemprop', 'duration').attr('content', isoDuration);
+        meta = (0, _jquery2.default)('<meta>').attr('itemprop', 'duration').attr('content', isoDuration);
         $figure.append(meta);
     }
 
@@ -116,35 +128,35 @@ function fromDialogResultToMarkup(dialogResult) {
 
     if (summaryImage) {
         //TODO: Attention - Nouvelles (ghtml) les images devraient defaultToClosestDimension == false
-        var defaultToClosestDimension = true /*contentItemSummary.summaryMultimediaItem.summaryImage.contentType.id != '20'*/ ;
+        var defaultToClosestDimension = true /*contentItemSummary.summaryMultimediaItem.summaryImage.contentType.id != '20'*/;
 
-        var image = imageUtilities.getConcreteImage(summaryImage, {
+        var image = _kocoImageUtilities2.default.getConcreteImage(summaryImage, {
             preferedWidth: 635,
             preferedHeight: 357,
             defaultToClosestDimension: defaultToClosestDimension
         });
 
         if (!image) {
-            image = imageUtilities.getHighResolutionAudioVideoConcreteImage(summaryImage);
+            image = _kocoImageUtilities2.default.getHighResolutionAudioVideoConcreteImage(summaryImage);
         }
 
         if (image && image.mediaLink && image.mediaLink.href) {
-            meta = $('<meta>').attr('itemprop', 'image').attr('content', image.mediaLink.href);
+            meta = (0, _jquery2.default)('<meta>').attr('itemprop', 'image').attr('content', image.mediaLink.href);
             $figure.append(meta);
         }
 
-        var thumbnail = imageUtilities.getConcreteImage(summaryImage, {
+        var thumbnail = _kocoImageUtilities2.default.getConcreteImage(summaryImage, {
             preferedWidth: 135,
             preferedHeight: 76,
             defaultToClosestDimension: defaultToClosestDimension
         });
 
         if (!thumbnail) {
-            thumbnail = imageUtilities.getLowResolutionAudioVideoConcreteImage(summaryImage);
+            thumbnail = _kocoImageUtilities2.default.getLowResolutionAudioVideoConcreteImage(summaryImage);
         }
 
         if (thumbnail && thumbnail.mediaLink && thumbnail.mediaLink.href) {
-            meta = $('<meta>').attr('itemprop', 'thumbnail').attr('content', thumbnail.mediaLink.href);
+            meta = (0, _jquery2.default)('<meta>').attr('itemprop', 'thumbnail').attr('content', thumbnail.mediaLink.href);
             $figure.append(meta);
         }
     }
@@ -159,15 +171,16 @@ function fromDialogResultToMarkup(dialogResult) {
     $figure.append($caption);
 
     return $figure.get(0).outerHTML;
-}
+} // Copyright (c) CBC/Radio-Canada. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 function fromMarkupToDialogInput(ed) {
-    var figure = $(ed.selection.getNode()).closest('figure.medianet'),
+    var figure = (0, _jquery2.default)(ed.selection.getNode()).closest('figure.medianet'),
         isResourceSelected = figure.length > 0,
         contentItemSummary = null,
-        result = $.extend({}, ko.toJS(ed.settings.medianetDialogSettings));
+        result = _jquery2.default.extend({}, _knockout2.default.toJS(ed.settings.medianetDialogSettings));
 
-    result.imagesDialogSettings = ko.toJS(ed.settings.imagesDialogSettings);
+    result.imagesDialogSettings = _knockout2.default.toJS(ed.settings.imagesDialogSettings);
 
     if (isResourceSelected) {
         contentItemSummary = {
@@ -231,20 +244,20 @@ function fromMarkupToDialogInput(ed) {
         contentItemSummary.legacy.zap = figure.data('zap');
         contentItemSummary.legacy.summary = figure.data('summary');
 
-        contentItemSummary.publishedLastTimeAt = moment(figure.data('date-time')).format('YYYY-MM-DD HH:mm Z');
+        contentItemSummary.publishedLastTimeAt = (0, _moment2.default)(figure.data('date-time')).format('YYYY-MM-DD HH:mm Z');
 
         if (figure.hasClass('audio')) {
-            contentItemSummary.legacy.resourceType = resourceUtilities.resourceTypes.audio;
+            contentItemSummary.legacy.resourceType = _kocoResourceUtilities2.default.resourceTypes.audio;
         } else if (figure.hasClass('livevideo')) {
-            contentItemSummary.legacy.resourceType = resourceUtilities.resourceTypes.liveVideo;
+            contentItemSummary.legacy.resourceType = _kocoResourceUtilities2.default.resourceTypes.liveVideo;
         } else if (figure.hasClass('liveaudio')) {
-            contentItemSummary.legacy.resourceType = resourceUtilities.resourceTypes.liveAudio;
+            contentItemSummary.legacy.resourceType = _kocoResourceUtilities2.default.resourceTypes.liveAudio;
         } else if (figure.hasClass('video')) {
-            contentItemSummary.legacy.resourceType = resourceUtilities.resourceTypes.video;
+            contentItemSummary.legacy.resourceType = _kocoResourceUtilities2.default.resourceTypes.video;
         } else if (figure.hasClass('track')) {
-            contentItemSummary.legacy.resourceType = resourceUtilities.resourceTypes.track;
+            contentItemSummary.legacy.resourceType = _kocoResourceUtilities2.default.resourceTypes.track;
         } else if (figure.hasClass('webradio')) {
-            contentItemSummary.legacy.resourceType = resourceUtilities.resourceTypes.webradio;
+            contentItemSummary.legacy.resourceType = _kocoResourceUtilities2.default.resourceTypes.webradio;
         }
     }
 
@@ -261,22 +274,22 @@ function getResourceCssClass(resource) {
     }
 
     switch (resource.legacy.resourceType) {
-        case resourceUtilities.resourceTypes.audio:
+        case _kocoResourceUtilities2.default.resourceTypes.audio:
             cssClass = 'audio';
             break;
-        case resourceUtilities.resourceTypes.video:
+        case _kocoResourceUtilities2.default.resourceTypes.video:
             cssClass = 'video';
             break;
-        case resourceUtilities.resourceTypes.liveVideo:
+        case _kocoResourceUtilities2.default.resourceTypes.liveVideo:
             cssClass = 'livevideo';
             break;
-        case resourceUtilities.resourceTypes.liveAudio:
+        case _kocoResourceUtilities2.default.resourceTypes.liveAudio:
             cssClass = 'liveaudio';
             break;
-        case resourceUtilities.resourceTypes.track:
+        case _kocoResourceUtilities2.default.resourceTypes.track:
             cssClass = 'track';
             break;
-        case resourceUtilities.resourceTypes.webradio:
+        case _kocoResourceUtilities2.default.resourceTypes.webradio:
             cssClass = 'webradio';
             break;
     }
@@ -284,10 +297,10 @@ function getResourceCssClass(resource) {
     return cssClass;
 }
 
-export default mceDialogFactory.createMcePlugin({
+exports.default = _tinymceDialogFactory2.default.createMcePlugin({
     pluginName: 'medianet',
-    title: 'Ins\u00e9rer/\u00e9diter un player M\u00e9dianet',
-    image: urls.url('/images/play.png'),
+    title: 'Insérer/éditer un player Médianet',
+    image: _kocoUrlUtilities2.default.url('/images/play.png'),
     pluginInfo: {
         longname: 'Medianet plugin',
         author: 'Plate-forme',

@@ -1,15 +1,33 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _koco = require('koco');
+
+var _koco2 = _interopRequireDefault(_koco);
+
+var _kocoDialoger = require('koco-dialoger');
+
+var _kocoDialoger2 = _interopRequireDefault(_kocoDialoger);
+
+var _tinymce = require('tinymce');
+
+var _tinymce2 = _interopRequireDefault(_tinymce);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // Copyright (c) CBC/Radio-Canada. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-import $ from 'jquery';
-import koco from 'koco';
-import dialoger from 'koco-dialoger';
-import tinyMCE from 'tinymce';
-
-
 var tool = {
-    init: function(editor, $textArea) {
-        var $window = $(window);
+    init: function init(editor, $textArea) {
+        var $window = (0, _jquery2.default)(window);
         var $container = $textArea.parent();
         var $tinymceEndMarker = getNextElement($container);
 
@@ -29,17 +47,17 @@ var tool = {
             'width': '100%'
         });
 
-        $window.resize(function() {
+        $window.resize(function () {
             if ($tinymceBody.width() != $tinymceToolbar.width()) {
                 $tinymceToolbar.width($tinymceBody.width());
             }
         });
 
-        tinyMCE.dom.Event.add(editor.getWin(), 'resize', function() {
-            $.waypoints('refresh');
+        _tinymce2.default.dom.Event.add(editor.getWin(), 'resize', function () {
+            _jquery2.default.waypoints('refresh');
         });
 
-        $container.waypoint(function(event, direction) {
+        $container.waypoint(function (event, direction) {
             if (isActiveView($container)) {
                 if (direction === 'down' && !isTopIntoView($container)) {
                     if (isBottomIntoView($container)) {
@@ -52,12 +70,12 @@ var tool = {
                 }
             }
         }, {
-            offset: function() {
+            offset: function offset() {
                 return getTopOffset(false);
             }
         });
 
-        $tinymceEndMarker.waypoint(function(event, direction) {
+        $tinymceEndMarker.waypoint(function (event, direction) {
             if (isActiveView($container)) {
                 if (!isScrolledIntoView($container, false)) {
                     if (direction === 'down' && !isTopIntoView($container)) {
@@ -70,8 +88,8 @@ var tool = {
                 }
             }
         }, {
-            offset: function() {
-                return $.waypoints('viewportHeight') - $(this).outerHeight();
+            offset: function offset() {
+                return _jquery2.default.waypoints('viewportHeight') - (0, _jquery2.default)(this).outerHeight();
             }
         });
 
@@ -83,10 +101,10 @@ var tool = {
             var elemBottom = elemTop + $elem.height();
 
             if (completelyVisible) {
-                return ((docViewTop < elemTop) && (docViewBottom > elemBottom));
+                return docViewTop < elemTop && docViewBottom > elemBottom;
             }
 
-            return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+            return elemBottom <= docViewBottom && elemTop >= docViewTop;
         }
 
         function moveToolbarToTop() {
@@ -131,13 +149,13 @@ var tool = {
             $tinymceToolbar.removeClass('editor-toolbar-top editor-toolbar-float');
 
             //stop flickering... bug IE8
-            if (tinyMCE.isIE8) {
+            if (_tinymce2.default.isIE8) {
                 $window.scrollTop($window.scrollTop() + 100);
             }
         }
 
         function getTopOffset(withPx) {
-            var offset = tinyMCE.isIE8 || ($window.width() > 768) ? 50 : 0;
+            var offset = _tinymce2.default.isIE8 || $window.width() > 768 ? 50 : 0;
 
             if (withPx) {
                 offset = offset + 'px';
@@ -151,7 +169,7 @@ var tool = {
         }
 
         function getBottomOffset(withPx) {
-            var offset = tinyMCE.isIE8 || ($window.width() > 768) ? 64 : 0;
+            var offset = _tinymce2.default.isIE8 || $window.width() > 768 ? 64 : 0;
 
             if (withPx) {
                 offset = offset + 'px';
@@ -190,4 +208,4 @@ function getNextElement($element) {
     return $next;
 }
 
-export default tool;
+exports.default = tool;
