@@ -2,8 +2,8 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 import $ from 'jquery';
-import router from 'router';
-import dialoger from 'dialoger';
+import koco from 'koco';
+import dialoger from 'koco-dialoger';
 import tinyMCE from 'tinymce';
 
 

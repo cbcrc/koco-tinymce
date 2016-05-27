@@ -12,9 +12,9 @@ var _tinymceUtilities = require('tinymce-utilities');
 
 var _tinymceUtilities2 = _interopRequireDefault(_tinymceUtilities);
 
-var _stringUtilities = require('string-utilities');
+var _kocoStringUtilities = require('koco-string-utilities');
 
-var _stringUtilities2 = _interopRequireDefault(_stringUtilities);
+var _kocoStringUtilities2 = _interopRequireDefault(_kocoStringUtilities);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,7 +55,7 @@ function replaceElement(editor, selectedNode, newElement) {
 }
 
 function isFigure(element) {
-    return element ? _stringUtilities2.default.caseInsensitiveCmp(element.tagName, 'figure') : false;
+    return element ? _kocoStringUtilities2.default.caseInsensitiveCmp(element.tagName, 'figure') : false;
 }
 
 exports.default = DialogResultHandler;

@@ -12,24 +12,24 @@ var _knockout = require('knockout');
 
 var _knockout2 = _interopRequireDefault(_knockout);
 
-var _urlUtilities = require('url-utilities');
+var _kocoUrlUtilities = require('koco-url-utilities');
 
-var _urlUtilities2 = _interopRequireDefault(_urlUtilities);
+var _kocoUrlUtilities2 = _interopRequireDefault(_kocoUrlUtilities);
 
 var _tinymceDialogFactory = require('tinymce-dialog-factory');
 
 var _tinymceDialogFactory2 = _interopRequireDefault(_tinymceDialogFactory);
 
-var _arrayUtilities = require('array-utilities');
+var _kocoArrayUtilities = require('koco-array-utilities');
 
-var _arrayUtilities2 = _interopRequireDefault(_arrayUtilities);
+var _kocoArrayUtilities2 = _interopRequireDefault(_kocoArrayUtilities);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _tinymceDialogFactory2.default.createMcePlugin({
     pluginName: 'images',
     title: 'Insérer/éditer une image',
-    image: _urlUtilities2.default.url('/images/pictures.png'),
+    image: _kocoUrlUtilities2.default.url('/images/pictures.png'),
     pluginInfo: {
         longname: 'Images plugin',
         author: 'Plate-forme',
@@ -67,7 +67,7 @@ function fromDialogResultToMarkup(dialogResult) {
         credits.push('<div itemprop="creator" itemscope itemtype="http://schema.org/Person" class="creator fakespan"><div class="fakespan" itemprop="name">' + dialogResult.conceptualImage.imageCredits + '</div></div>');
     }
 
-    if (_arrayUtilities2.default.isNotEmptyArray(credits)) {
+    if (_kocoArrayUtilities2.default.isNotEmptyArray(credits)) {
         $caption.append(' &copy;&nbsp;' + credits.join('/'));
     }
 

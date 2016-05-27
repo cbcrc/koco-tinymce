@@ -1,6 +1,6 @@
 {
   "name": "koco-tinymce",
-  "version": "1.2.0",
+  "version": "1.4.0",
   "homepage": "https://github.com/cbcrc/koco-tinymce",
   "authors": [
     "Mark Moyes <mark.moyes@cbc.ca>",
@@ -18,13 +18,15 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "koco": "^1.0.0",
-    "koco-dialoger": ">=1.1.0",
-    "koco-image-utilities": ">=1.1.0",
-    "koco-resource-utilities": ">=1.1.0",
-    "koco-string-utilities": ">=1.1.0",
-    "koco-url-utilities": ">=1.1.0",
-    "rangy": "~1.3.0"
+    "jquery": "~2.2.4",
+    "knockout": "~3.4.0",
+    "koco-array-utilities": "^1.1.0",
+    "koco-dialoger": "^1.1.0",
+    "koco-image-utilities": "^1.1.0",
+    "koco-resource-utilities": "^1.1.0",
+    "koco-string-utilities": "^1.1.0",
+    "koco-url-utilities": "^1.1.0",
+    "rangy": "^1.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
@@ -36,5 +38,8 @@
     "eslint-plugin-import": "^1.8.1",
     "eslint-plugin-jsx-a11y": "^1.2.2",
     "eslint-plugin-react": "^5.1.1"
+  },
+  "peerDependencies": {
+    "koco": "^1.0.0"
   }
 }

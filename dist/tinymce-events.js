@@ -8,9 +8,9 @@ var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _urlUtilities = require('url-utilities');
+var _kocoUrlUtilities = require('koco-url-utilities');
 
-var _urlUtilities2 = _interopRequireDefault(_urlUtilities);
+var _kocoUrlUtilities2 = _interopRequireDefault(_kocoUrlUtilities);
 
 var _tinymce = require('tinymce');
 

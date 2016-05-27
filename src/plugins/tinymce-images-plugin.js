@@ -3,9 +3,9 @@
 
 import $ from 'jquery';
 import ko from 'knockout';
-import urls from 'url-utilities';
+import urls from 'koco-url-utilities';
 import mceDialogFactory from 'tinymce-dialog-factory';
-import arrayUtilities from 'array-utilities';
+import arrayUtilities from 'koco-array-utilities';
 
 
 export default mceDialogFactory.createMcePlugin({

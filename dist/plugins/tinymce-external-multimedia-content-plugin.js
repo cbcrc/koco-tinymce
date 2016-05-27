@@ -8,9 +8,9 @@ var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _urlUtilities = require('url-utilities');
+var _kocoUrlUtilities = require('koco-url-utilities');
 
-var _urlUtilities2 = _interopRequireDefault(_urlUtilities);
+var _kocoUrlUtilities2 = _interopRequireDefault(_kocoUrlUtilities);
 
 var _tinymceDialogFactory = require('tinymce-dialog-factory');
 
@@ -21,7 +21,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = _tinymceDialogFactory2.default.createMcePlugin({
     pluginName: 'externalMultimediaContent',
     title: 'Insérer/éditer un contenu multimédia externe',
-    image: _urlUtilities2.default.url('/images/vimeo.png'),
+    image: _kocoUrlUtilities2.default.url('/images/vimeo.png'),
     pluginInfo: {
         longname: 'External multimedia content plugin',
         author: 'Plate-forme',

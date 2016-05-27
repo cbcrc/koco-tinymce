@@ -3,7 +3,7 @@
 
 //Tenter de ne pas utiliser tinymce.activeEditor et utiliser la reference a l'éditeur passer en arg
 import $ from 'jquery';
-import urls from 'url-utilities';
+import urls from 'koco-url-utilities';
 import tinyMCE from 'tinymce';
 import rangy from 'rangy';
 

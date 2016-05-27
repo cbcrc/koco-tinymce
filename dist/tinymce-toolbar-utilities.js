@@ -8,13 +8,13 @@ var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _router = require('router');
+var _koco = require('koco');
 
-var _router2 = _interopRequireDefault(_router);
+var _koco2 = _interopRequireDefault(_koco);
 
-var _dialoger = require('dialoger');
+var _kocoDialoger = require('koco-dialoger');
 
-var _dialoger2 = _interopRequireDefault(_dialoger);
+var _kocoDialoger2 = _interopRequireDefault(_kocoDialoger);
 
 var _tinymce = require('tinymce');
 

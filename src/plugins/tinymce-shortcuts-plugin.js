@@ -2,9 +2,9 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 import $ from 'jquery';
-import urls from 'url-utilities';
+import urls from 'koco-url-utilities';
 import mcePluginFactory from 'tinymce-plugin-factory';
-import dialoger from 'dialoger';
+import dialoger from 'koco-dialoger';
 
 
 export default mcePluginFactory.createMcePlugin({

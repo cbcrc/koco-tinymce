@@ -1,6 +1,6 @@
 import ko from 'knockout';
 import $ from 'jquery';
-import urls from 'url-utilities';
+import urls from 'koco-url-utilities';
 import tinymceEvents from 'tinymce-events';
 import tinymceUtilities from 'tinymce-utilities';
 import tinyMCE from 'tinymce';

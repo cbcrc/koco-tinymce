@@ -12,9 +12,9 @@ var _tinymceDialogResultHandler = require('tinymce-dialog-result-handler');
 
 var _tinymceDialogResultHandler2 = _interopRequireDefault(_tinymceDialogResultHandler);
 
-var _dialoger = require('dialoger');
+var _kocoDialoger = require('koco-dialoger');
 
-var _dialoger2 = _interopRequireDefault(_dialoger);
+var _kocoDialoger2 = _interopRequireDefault(_kocoDialoger);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33,7 +33,7 @@ function createMcePlugin(pluginConfig) {
     function mceCommand(ed) {
         var dialogResultHandler = new _tinymceDialogResultHandler2.default(ed);
 
-        _dialoger2.default.show(pluginConfig.dialog, pluginConfig.fromMarkupToDialogInput(ed)).then(function (dialogResult) {
+        _kocoDialoger2.default.show(pluginConfig.dialog, pluginConfig.fromMarkupToDialogInput(ed)).then(function (dialogResult) {
             if (dialogResult) {
                 var markup = pluginConfig.fromDialogResultToMarkup(dialogResult);
                 dialogResultHandler.replaceElement(markup);

@@ -8,17 +8,17 @@ var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _urlUtilities = require('url-utilities');
+var _kocoUrlUtilities = require('koco-url-utilities');
 
-var _urlUtilities2 = _interopRequireDefault(_urlUtilities);
+var _kocoUrlUtilities2 = _interopRequireDefault(_kocoUrlUtilities);
 
 var _tinymcePluginFactory = require('tinymce-plugin-factory');
 
 var _tinymcePluginFactory2 = _interopRequireDefault(_tinymcePluginFactory);
 
-var _dialoger = require('dialoger');
+var _kocoDialoger = require('koco-dialoger');
 
-var _dialoger2 = _interopRequireDefault(_dialoger);
+var _kocoDialoger2 = _interopRequireDefault(_kocoDialoger);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28,12 +28,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = _tinymcePluginFactory2.default.createMcePlugin({
     pluginName: 'shortcuts',
     title: 'Raccourcis clavier',
-    image: _urlUtilities2.default.url('/images/question.png'),
+    image: _kocoUrlUtilities2.default.url('/images/question.png'),
     pluginInfo: {
         longname: 'Shortcuts plugin',
         author: 'Plate-forme',
         version: '1.0'
     }
 }, function () {
-    _dialoger2.default.show('help-shortcuts');
+    _kocoDialoger2.default.show('help-shortcuts');
 });

@@ -12,21 +12,21 @@ var _knockout = require('knockout');
 
 var _knockout2 = _interopRequireDefault(_knockout);
 
-var _urlUtilities = require('url-utilities');
+var _kocoUrlUtilities = require('koco-url-utilities');
 
-var _urlUtilities2 = _interopRequireDefault(_urlUtilities);
+var _kocoUrlUtilities2 = _interopRequireDefault(_kocoUrlUtilities);
 
 var _tinymceDialogFactory = require('tinymce-dialog-factory');
 
 var _tinymceDialogFactory2 = _interopRequireDefault(_tinymceDialogFactory);
 
-var _imageUtilities = require('image-utilities');
+var _kocoImageUtilities = require('koco-image-utilities');
 
-var _imageUtilities2 = _interopRequireDefault(_imageUtilities);
+var _kocoImageUtilities2 = _interopRequireDefault(_kocoImageUtilities);
 
-var _resourceUtilities = require('resource-utilities');
+var _kocoResourceUtilities = require('koco-resource-utilities');
 
-var _resourceUtilities2 = _interopRequireDefault(_resourceUtilities);
+var _kocoResourceUtilities2 = _interopRequireDefault(_kocoResourceUtilities);
 
 var _moment = require('moment');
 
@@ -36,7 +36,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function fromDialogResultToMarkup(dialogResult) {
     var contentItemSummary = dialogResult,
-        isAudio = _resourceUtilities2.default.isAudioMedia(contentItemSummary.legacy.resourceType),
+        isAudio = _kocoResourceUtilities2.default.isAudioMedia(contentItemSummary.legacy.resourceType),
         $figure = (0, _jquery2.default)('<figure>'),
         $placeholder = (0, _jquery2.default)('<div>'),
         meta,
@@ -130,14 +130,14 @@ function fromDialogResultToMarkup(dialogResult) {
         //TODO: Attention - Nouvelles (ghtml) les images devraient defaultToClosestDimension == false
         var defaultToClosestDimension = true /*contentItemSummary.summaryMultimediaItem.summaryImage.contentType.id != '20'*/;
 
-        var image = _imageUtilities2.default.getConcreteImage(summaryImage, {
+        var image = _kocoImageUtilities2.default.getConcreteImage(summaryImage, {
             preferedWidth: 635,
             preferedHeight: 357,
             defaultToClosestDimension: defaultToClosestDimension
         });
 
         if (!image) {
-            image = _imageUtilities2.default.getHighResolutionAudioVideoConcreteImage(summaryImage);
+            image = _kocoImageUtilities2.default.getHighResolutionAudioVideoConcreteImage(summaryImage);
         }
 
         if (image && image.mediaLink && image.mediaLink.href) {
@@ -145,14 +145,14 @@ function fromDialogResultToMarkup(dialogResult) {
             $figure.append(meta);
         }
 
-        var thumbnail = _imageUtilities2.default.getConcreteImage(summaryImage, {
+        var thumbnail = _kocoImageUtilities2.default.getConcreteImage(summaryImage, {
             preferedWidth: 135,
             preferedHeight: 76,
             defaultToClosestDimension: defaultToClosestDimension
         });
 
         if (!thumbnail) {
-            thumbnail = _imageUtilities2.default.getLowResolutionAudioVideoConcreteImage(summaryImage);
+            thumbnail = _kocoImageUtilities2.default.getLowResolutionAudioVideoConcreteImage(summaryImage);
         }
 
         if (thumbnail && thumbnail.mediaLink && thumbnail.mediaLink.href) {
@@ -247,17 +247,17 @@ function fromMarkupToDialogInput(ed) {
         contentItemSummary.publishedLastTimeAt = (0, _moment2.default)(figure.data('date-time')).format('YYYY-MM-DD HH:mm Z');
 
         if (figure.hasClass('audio')) {
-            contentItemSummary.legacy.resourceType = _resourceUtilities2.default.resourceTypes.audio;
+            contentItemSummary.legacy.resourceType = _kocoResourceUtilities2.default.resourceTypes.audio;
         } else if (figure.hasClass('livevideo')) {
-            contentItemSummary.legacy.resourceType = _resourceUtilities2.default.resourceTypes.liveVideo;
+            contentItemSummary.legacy.resourceType = _kocoResourceUtilities2.default.resourceTypes.liveVideo;
         } else if (figure.hasClass('liveaudio')) {
-            contentItemSummary.legacy.resourceType = _resourceUtilities2.default.resourceTypes.liveAudio;
+            contentItemSummary.legacy.resourceType = _kocoResourceUtilities2.default.resourceTypes.liveAudio;
         } else if (figure.hasClass('video')) {
-            contentItemSummary.legacy.resourceType = _resourceUtilities2.default.resourceTypes.video;
+            contentItemSummary.legacy.resourceType = _kocoResourceUtilities2.default.resourceTypes.video;
         } else if (figure.hasClass('track')) {
-            contentItemSummary.legacy.resourceType = _resourceUtilities2.default.resourceTypes.track;
+            contentItemSummary.legacy.resourceType = _kocoResourceUtilities2.default.resourceTypes.track;
         } else if (figure.hasClass('webradio')) {
-            contentItemSummary.legacy.resourceType = _resourceUtilities2.default.resourceTypes.webradio;
+            contentItemSummary.legacy.resourceType = _kocoResourceUtilities2.default.resourceTypes.webradio;
         }
     }
 
@@ -274,22 +274,22 @@ function getResourceCssClass(resource) {
     }
 
     switch (resource.legacy.resourceType) {
-        case _resourceUtilities2.default.resourceTypes.audio:
+        case _kocoResourceUtilities2.default.resourceTypes.audio:
             cssClass = 'audio';
             break;
-        case _resourceUtilities2.default.resourceTypes.video:
+        case _kocoResourceUtilities2.default.resourceTypes.video:
             cssClass = 'video';
             break;
-        case _resourceUtilities2.default.resourceTypes.liveVideo:
+        case _kocoResourceUtilities2.default.resourceTypes.liveVideo:
             cssClass = 'livevideo';
             break;
-        case _resourceUtilities2.default.resourceTypes.liveAudio:
+        case _kocoResourceUtilities2.default.resourceTypes.liveAudio:
             cssClass = 'liveaudio';
             break;
-        case _resourceUtilities2.default.resourceTypes.track:
+        case _kocoResourceUtilities2.default.resourceTypes.track:
             cssClass = 'track';
             break;
-        case _resourceUtilities2.default.resourceTypes.webradio:
+        case _kocoResourceUtilities2.default.resourceTypes.webradio:
             cssClass = 'webradio';
             break;
     }
@@ -300,7 +300,7 @@ function getResourceCssClass(resource) {
 exports.default = _tinymceDialogFactory2.default.createMcePlugin({
     pluginName: 'medianet',
     title: 'Insérer/éditer un player Médianet',
-    image: _urlUtilities2.default.url('/images/play.png'),
+    image: _kocoUrlUtilities2.default.url('/images/play.png'),
     pluginInfo: {
         longname: 'Medianet plugin',
         author: 'Plate-forme',
