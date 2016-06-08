@@ -18,7 +18,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "jquery": "~2.2.4",
+    "jquery": "~2.1.4",
     "knockout": "~3.4.0",
     "koco-array-utilities": "^1.1.0",
     "koco-dialoger": "^1.1.0",
