@@ -31,7 +31,7 @@
 
     exports.default = _tinymceDialogFactory2.default.createMcePlugin({
         pluginName: 'photoAlbum',
-        title: 'photo-album.desc', //'Insérer/éditer un album photos',
+        title: 'photo-album.desc', //'Ins\u00e9rer/\u00e9diter un album photos',
         image: _kocoUrlUtilities2.default.url('/images/album.png'),
         pluginInfo: {
             longname: 'Photo Album plugin',

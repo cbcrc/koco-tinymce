@@ -35,7 +35,7 @@
 
     exports.default = _tinymceDialogFactory2.default.createMcePlugin({
         pluginName: 'images',
-        title: 'images.desc',
+        title: 'images.desc', //'Ins\u00e9rer/\u00e9diter une image',
         image: _kocoUrlUtilities2.default.url('/images/pictures.png'),
         pluginInfo: {
             longname: 'Images plugin',
@@ -48,11 +48,31 @@
     });
 
 
-    function fromDialogResultToMarkup(dialogResult) {
-        var $figure = (0, _jquery2.default)('<figure>').attr('itemprop', 'associatedMedia').attr('itemscope', 'itemscope').attr('itemtype', 'http://schema.org/ImageObject').attr('itemid', dialogResult.concreteImage.mediaLink.href) //On pourrait aussi mettre le normalizedname ?
-        .attr('data-align', dialogResult.align).attr('data-link', dialogResult.link).addClass('associatedMedia').addClass('image').addClass('mceNonEditable').addClass('align-' + dialogResult.align);
+    // Move to image-utilities
+    function isPictoImage(conceptualImage) {
+        return Boolean(conceptualImage && conceptualImage.contentType && conceptualImage.contentType.id === 19);
+    }
 
-        var $image = (0, _jquery2.default)('<img>').attr('alt', dialogResult.conceptualImage.alt).attr('src', dialogResult.concreteImage.mediaLink.href).attr('itemprop', 'contentURL');
+    // Move to image-utilities
+    function updateImageUrlWithMaxDimensions(imageUrl, maxWidth, maxHeight) {
+        var fitTransformation = '/w_' + maxWidth + ',h_' + maxHeight + ',c_limit';
+        return imageUrl.replace('/v1/', fitTransformation + '/v1/');
+    }
+
+    // Move to image-utilities
+    function getImagePreview(dialogResult) {
+        if (isPictoImage(dialogResult.conceptualImage)) {
+            return updateImageUrlWithMaxDimensions(dialogResult.concreteImage.mediaLink.href, 720, 480);
+        }
+
+        return dialogResult.concreteImage.mediaLink.href;
+    }
+
+    function fromDialogResultToMarkup(dialogResult) {
+        var $figure = (0, _jquery2.default)('<figure>').attr('itemprop', 'associatedMedia').attr('itemscope', 'itemscope').attr('itemtype', 'http://schema.org/ImageObject').attr('itemid', dialogResult.concreteImage.mediaLink.href).attr('data-align', dialogResult.align).attr('data-link', dialogResult.link).addClass('associatedMedia').addClass('image').addClass('mceNonEditable').addClass('align-' + dialogResult.align);
+
+        var imagePreview = getImagePreview(dialogResult);
+        var $image = (0, _jquery2.default)('<img>').attr('alt', dialogResult.conceptualImage.alt).attr('src', imagePreview).attr('itemprop', 'contentURL');
 
         var $caption = (0, _jquery2.default)('<figcaption>');
 
@@ -93,7 +113,7 @@
         };
 
         if ($figure.length > 0) {
-            result.concreteImageUrl = $figure.find('img').length > 0 ? (0, _jquery2.default)($figure.find('img')[0]).attr('src') : '';
+            result.concreteImageUrl = $figure.attr('itemid');
             result.alt = $figure.find('img').length > 0 ? (0, _jquery2.default)($figure.find('img')[0]).attr('alt') : '';
             result.legend = $figure.find('.description').length > 0 ? $figure.find('.description').html() : '';
             result.pressAgency = $figure.find('.copyrightHolder').length > 0 ? $figure.find('.copyrightHolder').children('div.fakespan').html() : '';

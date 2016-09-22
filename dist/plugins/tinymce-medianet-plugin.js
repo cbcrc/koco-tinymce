@@ -302,7 +302,7 @@
 
     exports.default = _tinymceDialogFactory2.default.createMcePlugin({
         pluginName: 'medianet',
-        title: 'medianet.desc', //'Insérer/éditer un player Médianet',
+        title: 'medianet.desc', //'Ins\u00e9rer/\u00e9diter un player M\u00e9dianet',
         image: _kocoUrlUtilities2.default.url('/images/play.png'),
         pluginInfo: {
             longname: 'Medianet plugin',

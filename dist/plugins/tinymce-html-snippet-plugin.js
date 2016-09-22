@@ -31,7 +31,7 @@
 
     exports.default = _tinymceDialogFactory2.default.createMcePlugin({
         pluginName: 'htmlSnippet',
-        title: 'html-snippet.desc', // 'Insérer un fragment de code HTML',
+        title: 'html-snippet.desc',
         image: _kocoUrlUtilities2.default.url('/images/snippet.png'),
         pluginInfo: {
             longname: 'Html snippet plugin',
