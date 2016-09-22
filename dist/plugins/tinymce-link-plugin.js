@@ -31,7 +31,7 @@
 
     exports.default = _tinymceDialogFactory2.default.createMcePlugin({
         pluginName: 'linkCustom',
-        title: 'Insérer/éditer un hyperlien',
+        title: 'advlink.link_desc',
         image: _kocoUrlUtilities2.default.url('/images/link.png'),
         pluginInfo: {
             longname: 'Hyperlien',

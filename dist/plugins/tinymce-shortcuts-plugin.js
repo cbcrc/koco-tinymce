@@ -33,7 +33,7 @@
 
     exports.default = _tinymcePluginFactory2.default.createMcePlugin({
         pluginName: 'shortcuts',
-        title: 'Raccourcis clavier',
+        title: 'shortcuts.desc', //'Raccourcis clavier',
         image: _kocoUrlUtilities2.default.url('/images/question.png'),
         pluginInfo: {
             longname: 'Shortcuts plugin',

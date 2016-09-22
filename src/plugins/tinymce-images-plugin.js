@@ -10,7 +10,7 @@ import arrayUtilities from 'koco-array-utilities';
 
 export default mceDialogFactory.createMcePlugin({
     pluginName: 'images',
-    title: 'Ins\u00e9rer/\u00e9diter une image',
+    title: 'images.desc', //'Ins\u00e9rer/\u00e9diter une image',
     image: urls.url('/images/pictures.png'),
     pluginInfo: {
         longname: 'Images plugin',

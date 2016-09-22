@@ -8,7 +8,7 @@ import mceDialogFactory from 'tinymce-dialog-factory';
 
 export default mceDialogFactory.createMcePlugin({
     pluginName: 'htmlSnippet',
-    title: 'Ins\u00e9rer un fragment de code HTML',
+    title: 'html-snippet.desc',
     image: urls.url('/images/snippet.png'),
     pluginInfo: {
         longname: 'Html snippet plugin',

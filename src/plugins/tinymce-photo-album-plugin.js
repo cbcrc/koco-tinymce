@@ -8,7 +8,7 @@ import mceDialogFactory from 'tinymce-dialog-factory';
 
 export default mceDialogFactory.createMcePlugin({
     pluginName: 'photoAlbum',
-    title: 'Ins\u00e9rer/\u00e9diter un album photos',
+    title: 'photo-album.desc', //'Ins\u00e9rer/\u00e9diter un album photos',
     image: urls.url('/images/album.png'),
     pluginInfo: {
         longname: 'Photo Album plugin',

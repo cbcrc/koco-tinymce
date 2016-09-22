@@ -8,7 +8,7 @@ import mceDialogFactory from 'tinymce-dialog-factory';
 
 export default mceDialogFactory.createMcePlugin({
     pluginName: 'externalMultimediaContent',
-    title: 'Ins\u00e9rer/\u00e9diter un contenu multim\u00e9dia externe',
+    title: 'external-multimedia-content.desc', //'Ins\u00e9rer/\u00e9diter un contenu multim\u00e9dia externe',
     image: urls.url('/images/vimeo.png'),
     pluginInfo: {
         longname: 'External multimedia content plugin',

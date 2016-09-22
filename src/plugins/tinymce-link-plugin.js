@@ -8,7 +8,7 @@ import mceDialogFactory from 'tinymce-dialog-factory';
 
 export default mceDialogFactory.createMcePlugin({
     pluginName: 'linkCustom',
-    title: 'Ins\u00e9rer/\u00e9diter un hyperlien',
+    title: 'advlink.link_desc',
     image: urls.url('/images/link.png'),
     pluginInfo: {
         longname: 'Hyperlien',

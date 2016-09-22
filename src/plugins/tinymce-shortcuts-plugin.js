@@ -9,7 +9,7 @@ import dialoger from 'koco-dialoger';
 
 export default mcePluginFactory.createMcePlugin({
     pluginName: 'shortcuts',
-    title: 'Raccourcis clavier',
+    title: 'shortcuts.desc', //'Raccourcis clavier',
     image: urls.url('/images/question.png'),
     pluginInfo: {
         longname: 'Shortcuts plugin',

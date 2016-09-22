@@ -35,7 +35,7 @@
 
     exports.default = _tinymceDialogFactory2.default.createMcePlugin({
         pluginName: 'images',
-        title: 'Insérer/éditer une image',
+        title: 'images.desc',
         image: _kocoUrlUtilities2.default.url('/images/pictures.png'),
         pluginInfo: {
             longname: 'Images plugin',

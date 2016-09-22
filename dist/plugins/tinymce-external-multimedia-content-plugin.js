@@ -31,7 +31,7 @@
 
     exports.default = _tinymceDialogFactory2.default.createMcePlugin({
         pluginName: 'externalMultimediaContent',
-        title: 'Insérer/éditer un contenu multimédia externe',
+        title: 'external-multimedia-content.desc', //'Insérer/éditer un contenu multimédia externe',
         image: _kocoUrlUtilities2.default.url('/images/vimeo.png'),
         pluginInfo: {
             longname: 'External multimedia content plugin',

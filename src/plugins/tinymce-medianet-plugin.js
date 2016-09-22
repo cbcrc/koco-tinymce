@@ -286,7 +286,7 @@ function getResourceCssClass(resource) {
 
 export default mceDialogFactory.createMcePlugin({
     pluginName: 'medianet',
-    title: 'Ins\u00e9rer/\u00e9diter un player M\u00e9dianet',
+    title: 'medianet.desc', //'Ins\u00e9rer/\u00e9diter un player M\u00e9dianet',
     image: urls.url('/images/play.png'),
     pluginInfo: {
         longname: 'Medianet plugin',
