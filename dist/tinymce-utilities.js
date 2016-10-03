@@ -55,6 +55,7 @@
         replaceQuotes($buffer);
         replaceFakeSpans($buffer);
         replaceNonBreakingSpaceImages($buffer);
+        removeIframeSandboxes($buffer);
 
         return normalizeQuotesWithNonBreakingSpaces($buffer.html());
     };
@@ -90,6 +91,12 @@
         $buffer.find('.nonbreaking').replaceWith('&nbsp;');
     }
 
+    function removeIframeSandboxes($buffer) {
+        $buffer.find('figure.snippet > .placeholder').each(function () {
+            (0, _jquery2.default)(this).html((0, _jquery2.default)(this).children('.sandbox').attr('srcdoc'));
+        });
+    }
+
     function normalizeQuotesWithNonBreakingSpaces(html) {
         return html.replace(/(«|&laquo;)(\s|&nbsp;)*/g, '&laquo;&nbsp;').replace(/(\s|&nbsp;)*(»|&raquo;)/g, '&nbsp;&raquo;');
     }
@@ -115,6 +122,8 @@
 
     TinymceUtilities.prototype.toTinymceMarkup = function (markup, editor) {
         var $buffer = (0, _jquery2.default)('<div>').html(markup);
+
+        $buffer.find('figure.snippet > .placeholder').each(wrapContentInSandboxedIframe);
 
         replaceNonBreakingSpaces($buffer, editor);
 
@@ -174,6 +183,16 @@
 
         element.parentNode.insertBefore(newElement, element);
         element.parentNode.removeChild(element);
+    }
+
+    function wrapContentInSandboxedIframe() {
+        var iframe = document.createElement('iframe');
+        iframe.className = 'sandbox';
+        iframe.setAttribute('sandbox', 'allow-scripts allow-forms allow-popups');
+        iframe.setAttribute('srcdoc', this.innerHTML);
+
+        this.innerHTML = '';
+        this.append(iframe);
     }
 
     TinymceUtilities.prototype.isInternetExplorer = function () {

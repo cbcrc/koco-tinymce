@@ -29,21 +29,16 @@ function fromDialogResultToMarkup(dialogResult) {
 }
 
 function fromMarkupToDialogInput(ed) {
-    var $figure = $(ed.selection.getNode()).closest('figure.snippet'),
-        markup = '';
-
-    if ($figure.length > 0) {
-        markup = $figure.find('.placeholder').length > 0 ? $figure.find('.placeholder').html() : '';
-    }
+    var $figure = $(ed.selection.getNode()).closest('figure.snippet');
+    var markup = $figure.find('.placeholder > .sandbox').attr('srcdoc') || '';
 
     var snippetBody = markup
         .replace(/^(&nbsp;)+/gi, '')
         .replace(/(&nbsp;)+$/gi, '')
         .replace(/mce-text\//gi, 'text/')
-        .replace(/data-mce-src="[^"]*"/gi, '');
-
-    snippetBody = snippetBody.replace(/</gi, '\n<');
-    snippetBody = snippetBody.replace(/^\n</i, '<');
+        .replace(/data-mce-src="[^"]*"/gi, '')
+        .replace(/((?!(\n)).|^)<(?!!\[CDATA\[)/gi, '$1\n<') // < not preceded by new line and not followed by ![CDATA[
+        .replace(/^\n</i, '<');
 
     return {
         isPredefinedSnippetsShown: true,
