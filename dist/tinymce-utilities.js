@@ -192,7 +192,7 @@
         iframe.setAttribute('srcdoc', this.innerHTML);
 
         this.innerHTML = '';
-        this.append(iframe);
+        (0, _jquery2.default)(this).append(iframe);
     }
 
     TinymceUtilities.prototype.isInternetExplorer = function () {
