@@ -1,4 +1,4 @@
-import $ from 'jquery';
+﻿import $ from 'jquery';
 import urls from 'koco-url-utilities';
 import tinyMCE from 'tinymce';
 
@@ -179,7 +179,7 @@ function wrapContentInSandboxedIframe() {
   iframe.setAttribute('srcdoc', this.innerHTML);
 
   this.innerHTML = '';
-  this.append(iframe);
+  $(this).append(iframe);
 }
 
 TinymceUtilities.prototype.isInternetExplorer = function() {
