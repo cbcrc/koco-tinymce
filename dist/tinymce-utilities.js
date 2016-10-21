@@ -49,6 +49,8 @@
             //bugfix IE10
             return '';
         }
+        // Remove tinymce-added nbsp, real ones are shown as images
+        tinymceMarkup = tinymceMarkup.replace(/&nbsp;/g, ' ');
 
         $buffer.html(tinymceMarkup);
         removeAllClassesRelatedToNonEditablePlugin($buffer);
