@@ -21,7 +21,7 @@ export default mceDialogFactory.createMcePlugin({
 });
 
 function fromDialogResultToMarkup(dialogResult) {
-    var markup = '<figure class="snippet mceNonEditable">';
+    var markup = '<figure class="snippet mceNonEditable" data-html-snippet-id="' + dialogResult.snippetId + '">';
     markup += '<div class="placeholder">' + dialogResult.snippetBody + '&nbsp;</div>';
     markup += '</figure>';
 
@@ -30,8 +30,9 @@ function fromDialogResultToMarkup(dialogResult) {
 
 function fromMarkupToDialogInput(ed) {
     var $figure = $(ed.selection.getNode()).closest('figure.snippet');
-    var markup = $figure.find('.placeholder > .sandbox').attr('srcdoc') || '';
+    var snippetId = $figure.attr('data-html-snippet-id') || 0;
 
+    var markup = $figure.find('.placeholder > .sandbox').attr('srcdoc') || '';
     var snippetBody = markup
         .replace(/^(&nbsp;)+/gi, '')
         .replace(/(&nbsp;)+$/gi, '')
@@ -42,6 +43,7 @@ function fromMarkupToDialogInput(ed) {
 
     return {
         isPredefinedSnippetsShown: true,
-        snippetBody: snippetBody
+        snippetBody: snippetBody,
+        snippetId: snippetId
     };
 }
