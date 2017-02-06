@@ -5,7 +5,10 @@ profile
 #ignore sublime projects
 *.sublime-workspace
 
-#ignore packages 
+#ignore packages
 node_modules
-bower_components
 *.log
+npm-debug.log.*
+
+#ignore generated files and folders
+dist

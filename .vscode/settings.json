@@ -1,0 +1,17 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "javascript.validate.enable": false,
+     "files.exclude": {
+        "**/.git": true,         // this is a default value
+        "**/.DS_Store": true,    // this is a default value
+        "dist": true,
+        "bin": true,
+        "obj": true,
+        "*.pubxml*": true,
+        "npm-debug.log*": true,
+        "*.csproj*": true,
+        "*.sublime-*": true
+    }
+,
+"vsicons.presets.angular": false
+}

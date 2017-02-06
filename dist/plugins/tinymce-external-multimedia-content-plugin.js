@@ -86,6 +86,10 @@
         if (dialogResult.contentType.id === 7) {
             return generateVimeoFigure(dialogResult);
         }
+        //thePlatform
+        if (dialogResult.contentType.id === 74) {
+            return generateThePlatformFigure(dialogResult);
+        }
 
         throw 'not implemented';
     }
@@ -116,6 +120,12 @@
 
     function generateVimeoFigure(dialogResult) {
         var embed = '<iframe src="//player.vimeo.com/video/' + dialogResult.id + '" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+
+        return generateExternalMultimediaContentFigure(dialogResult, embed);
+    }
+
+    function generateThePlatformFigure(dialogResult) {
+        var embed = '<iframe src="//www.cbc.ca/i/caffeine/syndicate/?mediaId=' + dialogResult.id + '" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
 
         return generateExternalMultimediaContentFigure(dialogResult, embed);
     }
