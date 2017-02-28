@@ -50,16 +50,19 @@ class TinyMceBaseTextEditor {
   }
 
   dispose() {
-    // tinyMCE.execCommand('mceRemoveControl', false, element.id);
     const editor = tinyMCE.get(this.options.element.id);
-    tinyMCE.execCommand('mceFocus', false, this.options.element.id);
-    tinyMCE.execCommand('mceRemoveControl', true, this.options.element.id);
-    editor.remove();
 
-    this.$textArea.remove();
-    this.$buffer.remove();
-    this.tinymceConfig = null;
-    this.options = null;
+    // todo: investiguer pourquoi editor is null
+    if (editor) {
+      tinyMCE.execCommand('mceFocus', false, this.options.element.id);
+      tinyMCE.execCommand('mceRemoveControl', true, this.options.element.id);
+      editor.remove();
+
+      this.$textArea.remove();
+      this.$buffer.remove();
+      this.tinymceConfig = null;
+      this.options = null;
+    }
   }
 
   tinymceOnContentChanged(editor) {
@@ -94,7 +97,7 @@ class TinyMceBaseTextEditor {
     this.updateContent(editor);
   }
 
-  tinymceOnPostRender(/* editor */) {
+  tinymceOnPostRender( /* editor */ ) {
     if (this.options.editorInitializationDeferred) {
       this.options.editorInitializationDeferred.resolve();
     }
