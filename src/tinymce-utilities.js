@@ -175,11 +175,15 @@ function replaceTag(element, newTagName) {
 }
 
 function wrapContentInSandboxedIframe() {
-  var iframe = document.createElement('iframe');
+  const iframe = document.createElement('iframe');
   iframe.className = 'sandbox';
-  iframe.setAttribute('sandbox', 'allow-scripts allow-forms allow-popups');
-  iframe.setAttribute('srcdoc', this.innerHTML);
 
+  // todo: remove when twitter is a supported external multimedia (upcoming PBI)
+  const isTwitterException = this.innerHTML.indexOf('platform.twitter.com/widgets.js') >= 0;
+  if (!isTwitterException) {
+    iframe.setAttribute('sandbox', 'allow-scripts allow-forms allow-popups');
+  }
+  iframe.setAttribute('srcdoc', this.innerHTML);
   this.innerHTML = '';
   $(this).append(iframe);
 }
