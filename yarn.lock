@@ -1809,9 +1809,9 @@ koco-array-utilities@^1.1.0:
   version "1.5.4"
   resolved "https://registry.yarnpkg.com/koco-array-utilities/-/koco-array-utilities-1.5.4.tgz#73e6b82618c28fcbd588e8766a7713f9c9bcfc71"
 
-koco-dialoger@^1.1.0:
-  version "1.6.9"
-  resolved "https://registry.yarnpkg.com/koco-dialoger/-/koco-dialoger-1.6.9.tgz#8c7391425c45a25c8f1dc377fb7257047d94d76e"
+koco-dialoger@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/koco-dialoger/-/koco-dialoger-2.0.2.tgz#f58a12b6be6daad877f1a2a95ab495c70ac02856"
   dependencies:
     bootstrap "^3.3.6"
     jquery "^2.1.4"
