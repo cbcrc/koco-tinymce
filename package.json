@@ -21,7 +21,7 @@
     "jquery": "~2.1.4",
     "knockout": "~3.4.0",
     "koco-array-utilities": "^1.1.0",
-    "koco-dialoger": "^2.0.0",
+    "koco-dialoger": "^1.1.0",
     "koco-image-utilities": "^1.1.0",
     "koco-resource-utilities": "^1.1.0",
     "koco-string-utilities": "^1.1.0",
