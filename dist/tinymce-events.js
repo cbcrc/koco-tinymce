@@ -205,6 +205,8 @@
                 ed.execCommand('mceImages', false);
             } else if ($closestFigure.hasClass('gallery')) {
                 ed.execCommand('mcePhotoAlbum', false);
+            } else if ($closestFigure.hasClass('medianetlive')) {
+                ed.execCommand('mceMedianetlive', false);
             } else if ($closestFigure.hasClass('medianet')) {
                 ed.execCommand('mceMedianet', false);
             } else if ($closestFigure.hasClass('embed')) {
